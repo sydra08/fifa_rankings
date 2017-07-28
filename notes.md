@@ -5,7 +5,7 @@
 [x] 3. Start with the entry point (file run)
 [x] 4. Force that to build the CLI interface
 [ ] 5. Stub out the interface
-  [ ] a. list view
+  [x] a. list view
   [ ] b. detail view
     [ ] determine what attributes are needed
   => still need to style the interface properly
@@ -58,6 +58,7 @@ Example:
 *should there be a header here with the team's ranking and points?*
 Team Name: Germany
 Current FIFA Ranking: 1
+Current Points Total: 1609
 Nickname(s): Nationalelf (national eleven), DFB-Elf (DFB Eleven), Die Mannschaft (The Team)
 Confederation: UEFA (Europe)
 Head Coach: Joachim Löw

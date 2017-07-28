@@ -25,13 +25,26 @@ class FifaRankings::CLI
   # https://stackoverflow.com/questions/19068075/output-an-array-of-objects-to-terminal-as-a-table-with-attributes-in-fixed-widt
 
   def mens_list
-    binding.pry
+    # binding.pry
     # puts "FIFA Men's World Rankings"
     # puts "Rank   Team - Points - Change"
     # puts "1.     Germany - 1609 - Up"
     # puts "2.     Brazil - 1603 - Down"
     # puts "3.     Argentina - 1413 - Down"
     FifaRankings::Team.rankings
+    @team1 = FifaRankings::Team.new
+    @team1.name = "Germany"
+    # @team1.head_coach = "Joachim Löw"
+    # @team1.captain = "Manuel Neuer"
+    # @team1.rank = 1
+    # @team1.points = 1609
+    # @team1.movement = "up"
+    # @team1.confederation = "UEFA (Europe)"
+    # @team1.nickname = "Nationalelf (national eleven), DFB-Elf (DFB Eleven), Die Mannschaft (The Team)"
+    @team2 = FifaRankings::Team.new
+    @team2.name = "Brazil"
+    @team3 = FifaRankings::Team.new
+    @team3.name = "Argentina"
   end
 
   def womens_list
@@ -44,7 +57,7 @@ class FifaRankings::CLI
 
   def details
     input = nil
-    while input != "exit"
+    while input != "exit" #need to add another control for incorrect input
       puts "Enter the rank of the team that you would like more info on, type 'list' to see whole list, or type 'exit' to leave"
       # maybe add the ability to choose from the mens or womens again?
       input = gets.chomp.downcase
@@ -52,11 +65,11 @@ class FifaRankings::CLI
         # logic here to determine which rank you selected and return the correct info
         case input
         when "1"
-          puts "info about Germany"
+          puts @team1
         when "2"
-          puts "info about Brazil"
+          puts @team2
         when "3"
-          puts "info about Argentina"
+        puts @team3
         when "list"
           mens_list
         else
@@ -74,6 +87,7 @@ class FifaRankings::CLI
           womens_list
         else
           puts "Incorrect input, please try again."
+          #this is showing up when exiting
         end
       end
     end

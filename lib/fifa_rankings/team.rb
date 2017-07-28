@@ -1,5 +1,5 @@
 class FifaRankings::Team
-
+  attr_accessor :name, :nickname, :head_coach, :confederation, :rank, :points, :captain, :movement
   def self.rankings
     puts "FIFA Men's World Rankings"
     puts "Rank   Team - Points - Change"
@@ -8,15 +8,15 @@ class FifaRankings::Team
     puts "3.     Argentina - 1413 - Down"
   end
 
-  # attributes for each team
-    # + Current Ranking => should this not be a team-level attribute? the ranking can later be conferred by the order in the array?
-    # + Team Name
-    # + Current Points Total
-    # + Movement in Rankings (up/down/none)
-    # + Description (maybe just the first paragraph?)
-    # + Association
-    # + Nicknames
-    # + Confederation
-    # + Head Coach
-    # + Captain
+  # there's a lot of team info, maybe it should be stored in a hash?
 end
+
+# + Description (maybe just the first paragraph?)
+# + Nicknames
+# + Confederation
+# + Head Coach
+# + Captain
+# + Current Ranking
+# + Team Name
+# + Current Points Total
+# + Movement in Rankings (up/down/none)
