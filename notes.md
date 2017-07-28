@@ -22,7 +22,7 @@ Quick summary of app
 
 + Greet user and ask if they want to view the Men's or Women's rankings
 
-+ Show the list of the 20 teams and basic stats: rank, number of points, change in position (up/down/no change)
++ Show the list of the 20 teams and basic stats: rank, number of points, change in position (up/down/none)
   FIFA Men's World Rankings
   + Rank (6 char)  Team (15 char) - Points (8 char)- Change (8)
   + 1.   Germany - 1609 - Up
@@ -39,13 +39,23 @@ Quick summary of app
 + Ask the user which team they would like to learn more about
   + Team info available:
     + Description (maybe just the first paragraph?)
-    + Association
     + Nicknames
     + Confederation
     + Head Coach
     + Captain
+    + Current Ranking => should this not be a team-level attribute? the ranking can later be conferred by the order in the array?
+    + Team Name
+    + Current Points Total
+    + Movement in Rankings (up/down/none)
 
     maybes:
     + Most caps
     + Top scorer
     + FIFA Code
+    + Association
+
+
+---
+- Should the Mens and Womens teams be different objects? They share the same properties...
+- Could there be 2 different class level arrays, 1 for each grouping?
+  -> going to map out one object first and then handle the M v W debate...

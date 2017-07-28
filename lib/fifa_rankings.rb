@@ -2,3 +2,5 @@
 
 require_relative "fifa_rankings/version"
 require_relative "fifa_rankings/cli"
+require_relative "fifa_rankings/team"
+require 'pry'

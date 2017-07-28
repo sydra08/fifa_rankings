@@ -25,11 +25,13 @@ class FifaRankings::CLI
   # https://stackoverflow.com/questions/19068075/output-an-array-of-objects-to-terminal-as-a-table-with-attributes-in-fixed-widt
 
   def mens_list
-    puts "FIFA Men's World Rankings"
-    puts "Rank   Team - Points - Change"
-    puts "1.     Germany - 1609 - Up"
-    puts "2.     Brazil - 1603 - Down"
-    puts "3.     Argentina - 1413 - Down"
+    binding.pry
+    # puts "FIFA Men's World Rankings"
+    # puts "Rank   Team - Points - Change"
+    # puts "1.     Germany - 1609 - Up"
+    # puts "2.     Brazil - 1603 - Down"
+    # puts "3.     Argentina - 1413 - Down"
+    FifaRankings::Team.rankings
   end
 
   def womens_list
@@ -37,7 +39,7 @@ class FifaRankings::CLI
     puts "Rank   Team - Points - Change"
     puts "1.     USA - 2118 - Up"
     puts "2.     Germany - 2111 - Down"
-    puts "3.     France - 2076 - No Change"
+    puts "3.     France - 2076 - None"
   end
 
   def details
@@ -73,8 +75,6 @@ class FifaRankings::CLI
         else
           puts "Incorrect input, please try again."
         end
-      # else
-      #   puts "Incorrect input, please try again."
       end
     end
   end
