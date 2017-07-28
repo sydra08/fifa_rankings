@@ -46,25 +46,35 @@ class FifaRankings::CLI
       puts "Enter the rank of the team that you would like more info on, type 'list' to see whole list, or type 'exit' to leave"
       # maybe add the ability to choose from the mens or womens again?
       input = gets.chomp.downcase
-      if input.to_i > 0 && self.selection == "mens" # make sure that the input is an integer
+      if self.selection == "mens" # make sure that the input is an integer
         # logic here to determine which rank you selected and return the correct info
-        case input.to_i
-        when 1
+        case input
+        when "1"
           puts "info about Germany"
-        when 2
+        when "2"
           puts "info about Brazil"
-        when 3
+        when "3"
           puts "info about Argentina"
+        when "list"
+          mens_list
+        else
+          puts "Incorrect input, please try again."
         end
-      elsif input.to_i > 0 && self.selection == "womens"
-        case input.to_i
-        when 1
+      elsif self.selection == "womens"
+        case input
+        when "1"
           puts "info about USA"
-        when 2
+        when "2"
           puts "info about Germany"
-        when 3
+        when "3"
           puts "info about France"
+        when "list"
+          womens_list
+        else
+          puts "Incorrect input, please try again."
         end
+      # else
+      #   puts "Incorrect input, please try again."
       end
     end
   end

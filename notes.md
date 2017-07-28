@@ -7,7 +7,7 @@
 [ ] 5. Stub out the interface
   [ ] a. list view
   [ ] b. detail view
-    [ ] determine what attributes are needed 
+    [ ] determine what attributes are needed
   => still need to style the interface properly
 [ ] 6. Start making things real
 [ ] 7. Discover objects
@@ -24,7 +24,7 @@ Quick summary of app
 
 + Show the list of the 20 teams and basic stats: rank, number of points, change in position (up/down/no change)
   FIFA Men's World Rankings
-  + Rank   Team - Points - Change
+  + Rank (6 char)  Team (15 char) - Points (8 char)- Change (8)
   + 1.   Germany - 1609 - Up
   + 2.   Brazil - 1603 - Down
   + 3.   Argentina - 1413 - Down
@@ -33,7 +33,7 @@ Quick summary of app
   + Rank   Team - Points - Change
   + 1.   USA - 2118 - Up
   + 2.   Germany - 2111 - Down
-  + 3.   France - 2076 - No Change
+  + 3.   France - 2076 - None
 
 
 + Ask the user which team they would like to learn more about
