@@ -3,28 +3,27 @@
 class FifaRankings::CLI
   attr_accessor :selection
 
-  # def welcome
-  #   puts "Current FIFA World Rankings"
-  # end
-
   def call
-    # welcome
     puts "Would you like to see the Men's or Women's team rankings?"
     # currently using fake data here, will want this to be neater and more abstract
-    case gets.downcase.chomp
-    when "mens"
+    input = gets.chomp
+    if input.downcase == "mens"
       self.selection = "mens"
       mens_list
-    when "womens"
+    elsif input.downcase == "womens"
       self.selection = "womens"
       womens_list
+    else
+      puts "Please try again"
+      call
     end
-    # need to handle when there is incorrect input here
-    more_info
+    details
+    goodbye
   end
 
   # want to clean the output up a bit and make it look nicer - consider this:
   # https://stackoverflow.com/questions/19068075/output-an-array-of-objects-to-terminal-as-a-table-with-attributes-in-fixed-widt
+
   def mens_list
     puts "FIFA Men's World Rankings"
     puts "Rank   Team - Points - Change"
@@ -41,14 +40,13 @@ class FifaRankings::CLI
     puts "3.     France - 2076 - No Change"
   end
 
-  def more_info
-    puts "If you would like to see more information about a team, please enter the rank number otherwise type exit"
-    input = gets.chomp.downcase
-    if input != "exit" 
-      if input.to_i == 0 || input.to_i > 20 #this captures inputs that are not "exit" or a number that's not listed
-        puts "Incorrect input. Please try again."
-        more_info
-      elsif input.to_i > 0 && self.selection == "mens" # make sure that the input is an integer
+  def details
+    input = nil
+    while input != "exit"
+      puts "Enter the rank of the team that you would like more info on, type 'list' to see whole list, or type 'exit' to leave"
+      # maybe add the ability to choose from the mens or womens again?
+      input = gets.chomp.downcase
+      if input.to_i > 0 && self.selection == "mens" # make sure that the input is an integer
         # logic here to determine which rank you selected and return the correct info
         case input.to_i
         when 1
@@ -69,6 +67,9 @@ class FifaRankings::CLI
         end
       end
     end
+  end
+
+  def goodbye
     puts "Goodbye!"
   end
 

@@ -5,6 +5,9 @@
 [x] 3. Start with the entry point (file run)
 [x] 4. Force that to build the CLI interface
 [ ] 5. Stub out the interface
+  [ ] a. list view
+  [ ] b. detail view
+    [ ] determine what attributes are needed 
   => still need to style the interface properly
 [ ] 6. Start making things real
 [ ] 7. Discover objects
