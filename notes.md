@@ -3,8 +3,9 @@
 [x] 1. Plan gem, imagine the interface (idea is to have a good sense of what you want to build from the user’s perspective)
 [x] 2. Start with the project structure (use google!)
 [x] 3. Start with the entry point (file run)
-[ ] 4. Force that to build the CLI interface
+[x] 4. Force that to build the CLI interface
 [ ] 5. Stub out the interface
+  => still need to style the interface properly
 [ ] 6. Start making things real
 [ ] 7. Discover objects
 [ ] 8. Program
