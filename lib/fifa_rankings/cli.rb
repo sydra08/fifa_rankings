@@ -1,11 +1,9 @@
 #CLI controller
-# currently using fake data here, will want this to be neater and more abstract
 
 class FifaRankings::CLI
   attr_accessor :selection
 
   def call
-    # put better instructions here
     puts "Welcome! If you would like to see the FIFA Men's World Rankings, type M. If you would like to see the FIFA Women's World Rankings, type W."
 
     input = gets.chomp
@@ -26,7 +24,6 @@ class FifaRankings::CLI
   # want to clean the output up a bit and make it look nicer - consider this:
   # https://stackoverflow.com/questions/19068075/output-an-array-of-objects-to-terminal-as-a-table-with-attributes-in-fixed-widt
 
-  # maybe add some extra spacing before printing the results to make it look nicer in the terminal
   def mens_list
     puts ""
     puts ""
@@ -55,7 +52,8 @@ class FifaRankings::CLI
       # maybe add the ability to choose from the mens or womens again?
       input = gets.chomp.downcase
       if self.selection == "mens"
-        if input.to_i > 0 && input.to_i < 4 #make sure the input is within the correct range
+        if input.to_i > 0 && input.to_i < 4
+          #make sure the input is within the correct range
           puts ""
           puts "#{FifaRankings::Team.mens_teams[input.to_i-1]}"
         elsif input == "list"
