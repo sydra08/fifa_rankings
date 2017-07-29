@@ -12,9 +12,9 @@ class FifaRankings::CLI
     if input.downcase == "m"
       self.selection = "mens"
       mens_list
-    elsif input.downcase == "w"
-      self.selection = "womens"
-      womens_list
+    # elsif input.downcase == "w"
+    #   self.selection = "womens"
+    #   womens_list
     else
       puts "Please try again"
       call
@@ -38,13 +38,13 @@ class FifaRankings::CLI
     end
   end
 
-  def womens_list
-    puts "FIFA Women's World Rankings"
-    puts "Rank   Team - Points - Change"
-    puts "1.     USA - 2118 - Up"
-    puts "2.     Germany - 2111 - Down"
-    puts "3.     France - 2076 - None"
-  end
+  # def womens_list
+  #   puts "FIFA Women's World Rankings"
+  #   puts "Rank   Team - Points - Change"
+  #   puts "1.     USA - 2118 - Up"
+  #   puts "2.     Germany - 2111 - Down"
+  #   puts "3.     France - 2076 - None"
+  # end
 
   def details
     input = nil
@@ -61,6 +61,7 @@ class FifaRankings::CLI
         elsif input == "list"
           mens_list
         else #why does this show up when exiting?
+          puts ""
           puts "Incorrect input, please try again."
         end
       # elsif self.selection == "womens"
