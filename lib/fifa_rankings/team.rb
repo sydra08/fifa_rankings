@@ -1,5 +1,5 @@
 class FifaRankings::Team
-  attr_accessor :name, :nickname, :head_coach, :confederation, :rank, :points, :captain, :movement
+  attr_accessor :name, :head_coach, :confederation, :rank, :points, :captain, :movement, :most_caps, :top_scorer, :highest_rank, :lowest_rank
   # attr_reader :gender
   #
   # @@mens_teams = []
