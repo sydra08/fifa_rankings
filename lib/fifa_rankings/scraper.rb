@@ -22,7 +22,13 @@ class FifaRankings::Scraper
       html = File.read(ranking_url)
       doc = Nokogiri::HTML(html)
       binding.pry
-      rank = doc.css('table.wikitable tr')[3].text
+      rank = doc.css('table.wikitable tr')[3].css('td').text.slice(0,2).strip! #=> need to only grab the first number
+        # do a slice for the first 2 characters (since the numbers will be double digits eventually)
+        # the child number will need to be increased every row
+      movement = doc.css('table.wikitable tr')[3].css('td')[1].css('img').attribute('alt').value #=> increase, decrease, steady
+      name = doc.css('table.wikitable tr')[3].css('td')[2].css('span a').text
+      team_url = doc.css('table.wikitable tr')[3].css('td')[2].css('span a').attribute('href').value
+      points = doc.css('table.wikitable tr')[3].css('td')[3].text
       # team = {
       #   name: ,
       #   rank:,
@@ -30,7 +36,6 @@ class FifaRankings::Scraper
       #   points:,
       #   team_url:
       # }
-
       # get the different rankings page elements for mens teams
 
 
