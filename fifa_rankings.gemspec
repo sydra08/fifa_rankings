@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Sydney Chun"]
   spec.email         = ["schun08@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Lists FIFA World Rankings for either the Men's or Women's teams."
+  spec.description   = "Uses data from Wikipedia to display the current top 20 teams according to the FIFA World Rankings. It also allows you to learn more information about each team."
+  spec.homepage      = "https://github.com/sydra08/fifa_rankings"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -32,4 +32,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "pry"
+  spec.add_dependency "nokogiri"
 end

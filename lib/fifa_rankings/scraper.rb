@@ -13,14 +13,26 @@ class FifaRankings::Scraper
     # returns an array of hashes
       # this will be passed to the Team class and used to create the Team objects
       # team = {
-      #   name:,
+      #   name: ,
       #   rank:,
       #   movement:,
       #   points:,
       #   team_url:
       # }
-      html = File.open('./fixtures/Mens-Wiki.html')
-      
+      html = File.read(ranking_url)
+      doc = Nokogiri::HTML(html)
+      binding.pry
+      rank = doc.css('table.wikitable tr')[3].text
+      # team = {
+      #   name: ,
+      #   rank:,
+      #   movement:,
+      #   points:,
+      #   team_url:
+      # }
+
+      # get the different rankings page elements for mens teams
+
 
 
   end
@@ -43,3 +55,5 @@ class FifaRankings::Scraper
   end
 
 end
+
+test = FifaRankings::Scraper.scrape_rankings_page("./fixtures/Mens-Wiki.html")
