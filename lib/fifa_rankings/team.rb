@@ -14,13 +14,9 @@ class FifaRankings::Team
   #   end
   # end
 
-  def self.mens_teams
-    @@mens_teams
-  end
-
-  def self.womens_teams
-    @@womens_teams
-  end
+  # def self.mens_teams
+  #   @@mens_teams
+  # end
 
   def self.mens_teams
     # puts "FIFA Men's World Rankings"

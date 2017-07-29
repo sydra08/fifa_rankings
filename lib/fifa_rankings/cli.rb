@@ -28,6 +28,8 @@ class FifaRankings::CLI
 
   # maybe add some extra spacing before printing the results to make it look nicer in the terminal
   def mens_list
+    puts ""
+    puts ""
     puts "FIFA Men's World Rankings"
     puts "Rank   Team - Points - Change"
     @mens = FifaRankings::Team.mens_teams
@@ -47,31 +49,34 @@ class FifaRankings::CLI
   def details
     input = nil
     while input != "exit"
+      puts ""
+      puts ""
       puts "Enter the rank of the team that you would like more info on, type 'list' to see whole list, or type 'exit' to leave"
       # maybe add the ability to choose from the mens or womens again?
       input = gets.chomp.downcase
       if self.selection == "mens"
         if input.to_i > 0 && input.to_i < 4 #make sure the input is within the correct range
+          puts ""
           puts "#{FifaRankings::Team.mens_teams[input.to_i-1]}"
         elsif input == "list"
           mens_list
         else #why does this show up when exiting?
           puts "Incorrect input, please try again."
         end
-      elsif self.selection == "womens"
-        case input
-        when "1"
-          puts "info about USA"
-        when "2"
-          puts "info about Germany"
-        when "3"
-          puts "info about France"
-        when "list"
-          womens_list
-        else
-          puts "Incorrect input, please try again."
-          #this is showing up when exiting
-        end
+      # elsif self.selection == "womens"
+      #   case input
+      #   when "1"
+      #     puts "info about USA"
+      #   when "2"
+      #     puts "info about Germany"
+      #   when "3"
+      #     puts "info about France"
+      #   when "list"
+      #     womens_list
+      #   else
+      #     puts "Incorrect input, please try again."
+      #     #this is showing up when exiting
+      #   end
       end
     end
   end
