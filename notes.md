@@ -7,7 +7,7 @@
 [ ] 5. Stub out the interface
   [x] a. list view
   [ ] b. detail view
-    [ ] determine what attributes are needed
+    [x] determine what attributes are needed
   => still need to style the interface properly
 [ ] 6. Start making things real
 [ ] 7. Discover objects
