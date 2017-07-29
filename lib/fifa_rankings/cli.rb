@@ -1,16 +1,18 @@
 #CLI controller
+# currently using fake data here, will want this to be neater and more abstract
 
 class FifaRankings::CLI
   attr_accessor :selection
 
   def call
-    puts "Would you like to see the Men's or Women's team rankings?"
-    # currently using fake data here, will want this to be neater and more abstract
+    # put better instructions here
+    puts "Welcome! If you would like to see the FIFA Men's World Rankings, type M. If you would like to see the FIFA Women's World Rankings, type W."
+
     input = gets.chomp
-    if input.downcase == "mens"
+    if input.downcase == "m"
       self.selection = "mens"
       mens_list
-    elsif input.downcase == "womens"
+    elsif input.downcase == "w"
       self.selection = "womens"
       womens_list
     else
@@ -24,27 +26,14 @@ class FifaRankings::CLI
   # want to clean the output up a bit and make it look nicer - consider this:
   # https://stackoverflow.com/questions/19068075/output-an-array-of-objects-to-terminal-as-a-table-with-attributes-in-fixed-widt
 
+  # maybe add some extra spacing before printing the results to make it look nicer in the terminal
   def mens_list
-    # binding.pry
-    # puts "FIFA Men's World Rankings"
-    # puts "Rank   Team - Points - Change"
-    # puts "1.     Germany - 1609 - Up"
-    # puts "2.     Brazil - 1603 - Down"
-    # puts "3.     Argentina - 1413 - Down"
-    FifaRankings::Team.rankings
-    @team1 = FifaRankings::Team.new
-    @team1.name = "Germany"
-    # @team1.head_coach = "Joachim Löw"
-    # @team1.captain = "Manuel Neuer"
-    # @team1.rank = 1
-    # @team1.points = 1609
-    # @team1.movement = "up"
-    # @team1.confederation = "UEFA (Europe)"
-    # @team1.nickname = "Nationalelf (national eleven), DFB-Elf (DFB Eleven), Die Mannschaft (The Team)"
-    @team2 = FifaRankings::Team.new
-    @team2.name = "Brazil"
-    @team3 = FifaRankings::Team.new
-    @team3.name = "Argentina"
+    puts "FIFA Men's World Rankings"
+    puts "Rank   Team - Points - Change"
+    @mens = FifaRankings::Team.mens_teams
+    @mens.each.with_index(1) do |team, i|
+      puts "#{i}.   #{team.name} - #{team.points} - #{team.movement}"
+    end
   end
 
   def womens_list
@@ -57,22 +46,16 @@ class FifaRankings::CLI
 
   def details
     input = nil
-    while input != "exit" #need to add another control for incorrect input
+    while input != "exit"
       puts "Enter the rank of the team that you would like more info on, type 'list' to see whole list, or type 'exit' to leave"
       # maybe add the ability to choose from the mens or womens again?
       input = gets.chomp.downcase
-      if self.selection == "mens" # make sure that the input is an integer
-        # logic here to determine which rank you selected and return the correct info
-        case input
-        when "1"
-          puts @team1
-        when "2"
-          puts @team2
-        when "3"
-        puts @team3
-        when "list"
+      if self.selection == "mens"
+        if input.to_i > 0 && input.to_i < 4 #make sure the input is within the correct range
+          puts "#{FifaRankings::Team.mens_teams[input.to_i-1]}"
+        elsif input == "list"
           mens_list
-        else
+        else #why does this show up when exiting?
           puts "Incorrect input, please try again."
         end
       elsif self.selection == "womens"
