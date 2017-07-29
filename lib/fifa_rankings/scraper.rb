@@ -19,6 +19,8 @@ class FifaRankings::Scraper
       #   points:,
       #   team_url:
       # }
+      html = File.open('./fixtures/Mens-Wiki.html')
+      
 
 
   end
@@ -37,7 +39,7 @@ class FifaRankings::Scraper
       #   highest_rank:,
       #   lowest_rank:
       # }
-      
+
   end
 
 end
