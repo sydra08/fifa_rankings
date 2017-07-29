@@ -23,6 +23,7 @@ class FifaRankings::Team
     team1.name = "Germany"
     team1.points = 1609
     team1.movement = "Up"
+    team2 = self.new
     team2.name = "Brazil"
     team2.points = 1603
     team2.movement = "Down"

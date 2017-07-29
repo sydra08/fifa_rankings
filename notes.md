@@ -66,8 +66,6 @@ Captain: Manuel Neuer
 Brief Description:
 "The Germany national football team (German: Die deutsche Fußballnationalmannschaft or just Die Mannschaft) is the men's football team that has represented Germany in international competition since 1908.[4] It is governed by the German Football Association (Deutscher Fußball-Bund), founded in 1900.[8][9] Ever since the DFB was reinaugurated in 1949 the team has represented the Federal Republic of Germany. Under Allied occupation and division, two other separate national teams were also recognised by FIFA: the Saarland team representing the Saarland (1950–1956) and the East German team representing the German Democratic Republic (1952–1990). Both have been absorbed along with their records[10][11] by the current national team. The official name and code "Germany FR (FRG)" was shortened to "Germany (GER)" following the reunification in 1990."
 
-
-
 *maybe leave this out*
 Current Roster:
 1	GK	Kevin Trapp
@@ -91,11 +89,3 @@ Current Roster:
 9	FW	Sandro Wagner
 11	FW	Timo Werner
 13	FW	Lars Stindl
-
-
-
-
----
-- Should the Mens and Womens teams be different objects? They share the same properties...
-- Could there be 2 different class level arrays, 1 for each grouping?
-  -> going to map out one object first and then handle the M v W debate...
