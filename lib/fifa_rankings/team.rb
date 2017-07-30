@@ -9,8 +9,8 @@
 
 
 class FifaRankings::Team
-  attr_accessor :name, :head_coach, :confederation, :rank, :points, :captain, :movement, :most_caps, :top_scorer, :highest_rank, :lowest_rank, :team_url, :gender
-  #
+  attr_accessor :name, :head_coach, :confederation, :rank, :points, :captain, :movement, :most_caps, :top_scorer, :team_url, :gender #:highest_rank, :lowest_rank, 
+
   @@mens_teams = []
   @@womens_teams = []
 

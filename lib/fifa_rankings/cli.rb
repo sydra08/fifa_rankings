@@ -9,12 +9,12 @@ class FifaRankings::CLI
     if input.downcase == "m"
       self.selection = "mens"
       self.class.get_mens_teams
-      self.class.add_mens_attributes
+      # self.class.add_mens_attributes
       mens_list
     elsif input.downcase == "w"
       self.selection = "womens"
       self.class.get_womens_teams
-      self.class.add_womens_attributes
+      # self.class.add_womens_attributes
       womens_list
     else
       puts "Please try again"
@@ -33,26 +33,26 @@ class FifaRankings::CLI
     teams
   end
 
-  def self.add_mens_attributes
-    FifaRankings::Team.all_mens.each do |team|
-      attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Mens-Wiki.html')
-      team.add_attributes(attributes)
-    end
-    FifaRankings::Team.all_mens
-  end
+  # def self.add_mens_attributes
+  #   FifaRankings::Team.all_mens.each do |team|
+  #     attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Mens-Wiki.html')
+  #     team.add_attributes(attributes)
+  #   end
+  #   FifaRankings::Team.all_mens
+  # end
 
   def self.get_womens_teams
     teams = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Womens-Wiki.html')
     FifaRankings::Team.create_from_array(teams)
   end
 
-  def self.add_womens_attributes
-    FifaRankings::Team.all_womens.each do |team|
-      attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
-      team.add_attributes(attributes)
-    end
-    FifaRankings::Team.all_womens
-  end
+  # def self.add_womens_attributes
+  #   FifaRankings::Team.all_womens.each do |team|
+  #     attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
+  #     team.add_attributes(attributes)
+  #   end
+  #   FifaRankings::Team.all_womens
+  # end
 
   def mens_list
     puts ""
@@ -79,20 +79,19 @@ class FifaRankings::CLI
     # maybe 2 different methods?
     team = FifaRankings::Team.mens_rankings[rank]
     puts ""
-    puts "#{team.name}"
-    puts "----------------------"
+    puts "  #{team.name}"
+    puts "-----------------"
     puts "  rank:" + " #{team.rank}"
     puts "  points:" + " #{team.points}"
-    puts "  ---"
     puts "  confederation:" + " #{team.confederation}"
     puts "  head coach:" + " #{team.head_coach}"
     puts "  team captain:" + " #{team.captain}"
     puts "  top scorer:" + " #{team.top_scorer}"
     puts "  most caps:" + " #{team.most_caps}"
-    puts "  ---"
-    puts "  highest rank:" + " #{team.highest_rank}"
-    puts "  lowest rank" + " #{team.lowest_rank}"
-    puts "----------------------"
+    # puts "  ---"
+    # puts "  highest rank:" + " #{team.highest_rank}"
+    # puts "  lowest rank" + " #{team.lowest_rank}"
+    puts "-----------------"
   end
 
 
@@ -101,7 +100,7 @@ class FifaRankings::CLI
     # maybe 2 different methods?
     team = FifaRankings::Team.womens_rankings[rank]
     puts ""
-    puts "#{team.name}"
+    puts "  #{team.name}"
     puts "----------------------"
     puts "  rank:" + " #{team.rank}"
     puts "  points:" + " #{team.points}"
@@ -111,9 +110,9 @@ class FifaRankings::CLI
     puts "  team captain:" + " #{team.captain}"
     puts "  top scorer:" + " #{team.top_scorer}"
     puts "  most caps:" + " #{team.most_caps}"
-    puts "  ---"
-    puts "  highest rank:" + " #{team.highest_rank}"
-    puts "  lowest rank" + " #{team.lowest_rank}"
+    # puts "  ---"
+    # puts "  highest rank:" + " #{team.highest_rank}"
+    # puts "  lowest rank" + " #{team.lowest_rank}"
     puts "----------------------"
   end
 
