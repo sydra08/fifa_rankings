@@ -4,9 +4,9 @@
 [x] 2. Start with the project structure (use google!)
 [x] 3. Start with the entry point (file run)
 [x] 4. Force that to build the CLI interface
-[ ] 5. Stub out the interface
+[x] 5. Stub out the interface
   [x] a. list view
-  [ ] b. detail view
+  [x] b. detail view
     [x] determine what attributes are needed
   => still need to style the interface properly
 [x] 6. Start making things real
@@ -14,23 +14,29 @@
 [ ] 8. Program
 
 #To Do
-[ ] Team Class - figure out how to put the teams in the right array based on gender
+[x] Team Class - figure out how to put the teams in the right array based on gender
 [ ] Re-evaluate the team details that I want to display
-[ ] CLI - Stub out Detail view
+[x] CLI - Stub out Detail view
 [ ] Scraper - Test out scraping all womens team details
-[ ] Scraper - figure out how to get the team details
+[ ] Scraper - figure out how to get the mens team details
 [ ] Fix incorrect input bug in CLI #call loop
-[ ] Test out passing the scraped rankings data to the Team Class
-[ ] Test out Scraper => Team => CLI with rankings data 
+[x] Test out passing the scraped rankings data to the Team Class
+[x] Test out Scraper => Team => CLI with rankings data
+[x] Fix bug - teams are out of order when ranked
+[ ] Test out passing the scraped team data to the Team Class
+[ ] Test out Scraper => Team => CLI with one team's data
+[ ] Test out Scraper => Team => CLI with all team data
 
 #Tasks for Go-Live/Live Testing
 [ ] change the if statements in #scrape_rankings_page
-[ ] change html variable assignment in Scraper class
+[ ] change html variable assignment in Scraper#scrape_rankings_page
+[ ] change the html variable assignment Scraper#scrape_team_page
 
 #Potential Elements to Refactor/Add
 [ ] #scrape_rankings_page - logic for scraping women's team rankings
 [ ] CLI - use %s formatting for list view
 [ ] CLI - allow user to go back and see W or M teams after selection
+[ ] revisit assigning team's gender - should it go in the scraper? should it be done elsewhere?
 
 
 Quick summary of app
