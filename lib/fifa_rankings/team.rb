@@ -45,12 +45,12 @@ class FifaRankings::Team
   def self.mens_rankings
     # display the mens teams sorted by ranking
     # tested that this works with faked data
-    self.all_mens.sort_by {|team| team.rank}
+    self.all_mens.sort_by {|team| team.rank.to_i}
   end
 
   def self.womens_rankings
     # display the womens teams sorted by ranking
-    self.all_womens.sort_by {|team| team.rank}
+    self.all_womens.sort_by {|team| team.rank.to_i}
   end
 
   def self.all_mens
