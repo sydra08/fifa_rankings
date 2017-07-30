@@ -7,6 +7,7 @@
 class FifaRankings::Scraper
 
   def self.scrape_rankings_page(ranking_url)
+    # need to change the if statements and html variable assignment when it's time to live test
     # scrape the rankings page and collect the information for each team
     # how do we handle which wiki page to go to? => should that be passed in via the CLI?
       # could be done when the user is asked to make a choice and the urls could be variables contained within the Scraper class...?
@@ -33,7 +34,9 @@ class FifaRankings::Scraper
           movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
           points: doc.css('table.wikitable tr')[i].css('td')[3].text,
           team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('a').attribute('href').value,
+          gender: "womens"
         }
+        # can this be handled in a better way?
         if i < 11
           team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,1).strip
         else
@@ -46,27 +49,20 @@ class FifaRankings::Scraper
       #=> this is for the actual mens url: ranking_url.match('/FIFA_World_Rankings/')
       #scraping logic for mens team
       i = 3
-      while i < 23 #i = 22 is the last row of the table
+      while i < 23 
         team = {
           name: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').text,
           rank: doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip,
           movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
           points: doc.css('table.wikitable tr')[i].css('td')[3].text,
-          team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').attribute('href').value
+          team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').attribute('href').value,
+          gender: "mens"
         }
         teams << team
         i += 1
       end
     end
-    binding.pry
     teams
-      # rank = doc.css('table.wikitable tr')[3].css('td').text.slice(0,2).strip! #=> need to only grab the first number
-      #   # do a slice for the first 2 characters (since the numbers will be double digits eventually)
-      #   # the child number will need to be increased every row
-      # movement = doc.css('table.wikitable tr')[3].css('td')[1].css('img').attribute('alt').value #=> increase, decrease, steady
-      # name = doc.css('table.wikitable tr')[3].css('td')[2].css('span a').text
-      # team_url = doc.css('table.wikitable tr')[3].css('td')[2].css('span a').attribute('href').value
-      # points = doc.css('table.wikitable tr')[3].css('td')[3].text
   end
 
   def self.scrape_team_page(team_url)
@@ -100,4 +96,4 @@ class FifaRankings::Scraper
 
 end
 
-test = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Womens-Wiki.html')
+test = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Mens-Wiki.html')
