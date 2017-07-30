@@ -27,12 +27,22 @@ class FifaRankings::CLI
 
   def self.get_mens_teams
     teams = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Mens-Wiki.html')
-    FifaRankings::Team.create_from_array(teams)
+    teams = FifaRankings::Team.create_from_array(teams)
+    teams.each do |team|
+      attributes = FifaRankings::Scraper.scrape_team_page(team.team_url)
+      team.add_attributes(attributes)
+    end
+    teams
   end
 
   def self.get_womens_teams
     teams = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Womens-Wiki.html')
-    FifaRankings::Team.create_from_array(teams)
+    teams = FifaRankings::Team.create_from_array(teams)
+    teams.each do |team|
+      attributes = FifaRankings::Scraper.scrape_team_page(team.team_url)
+      team.add_attributes(attributes)
+    end
+    teams
   end
 
   def mens_list

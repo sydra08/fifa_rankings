@@ -34,12 +34,12 @@ class FifaRankings::Team
       # is it possible to pass the gender argument here and then pass it to #initialize?
   end
 
-  def self.add_attributes(attributes_hash)
+  def add_attributes(attributes_hash)
     # add attributes to Team instances from a hash for the detail view
-    # attributes_hash.each do |k,v|
-    #   self.send(("#{k}="),v)
-    # end
-    # self
+    attributes_hash.each do |k,v|
+      self.send(("#{k}="),v)
+    end
+    self
   end
 
   def self.mens_rankings
