@@ -17,11 +17,13 @@
 [x] Team Class - figure out how to put the teams in the right array based on gender
 [ ] Re-evaluate the team details that I want to display
 [x] CLI - Stub out Detail view
-[ ] Test out detail view for one team 
+[ ] decide whether or not to convert the "movement" from increase/decrease/steady to up/down/none
+[x] Test out detail view for one team
 [ ] Scraper - figure out how to get the lowest rank detail item
 [ ] Scraper - Test out scraping all womens team details
 [ ] Scraper - figure out how to get the mens team details
 [ ] Fix incorrect input bug in CLI #call loop
+[ ] Fix bug in CLI => sometimes 'exit' doesn't exit 
 [x] Test out passing the scraped rankings data to the Team Class
 [x] Test out Scraper => Team => CLI with rankings data
 [x] Fix bug - teams are out of order when ranked
@@ -40,6 +42,7 @@
 [ ] CLI - use %s formatting for list view
 [ ] CLI - allow user to go back and see W or M teams after selection
 [ ] revisit assigning team's gender - should it go in the scraper? should it be done elsewhere?
+[ ] squash some commits?
 
 
 Quick summary of app
