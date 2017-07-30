@@ -17,14 +17,17 @@
 [x] Team Class - figure out how to put the teams in the right array based on gender
 [ ] Re-evaluate the team details that I want to display
 [x] CLI - Stub out Detail view
+[ ] Test out detail view for one team 
+[ ] Scraper - figure out how to get the lowest rank detail item
 [ ] Scraper - Test out scraping all womens team details
 [ ] Scraper - figure out how to get the mens team details
 [ ] Fix incorrect input bug in CLI #call loop
 [x] Test out passing the scraped rankings data to the Team Class
 [x] Test out Scraper => Team => CLI with rankings data
 [x] Fix bug - teams are out of order when ranked
-[ ] Test out passing the scraped team data to the Team Class
-[ ] Test out Scraper => Team => CLI with one team's data
+[x] Test out passing one team's scraped data to the Team Class
+[ ] Test out passing all team scraped data to the Team Class
+[x] Test out Scraper => Team => CLI with one team's data
 [ ] Test out Scraper => Team => CLI with all team data
 
 #Tasks for Go-Live/Live Testing
