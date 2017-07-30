@@ -9,9 +9,28 @@
   [ ] b. detail view
     [x] determine what attributes are needed
   => still need to style the interface properly
-[ ] 6. Start making things real
+[x] 6. Start making things real
 [ ] 7. Discover objects
 [ ] 8. Program
+
+#To Do
+[ ] Team Class - figure out how to put the teams in the right array based on gender
+[ ] Re-evaluate the team details that I want to display
+[ ] CLI - Stub out Detail view
+[ ] Scraper - Test out scraping all womens team details
+[ ] Scraper - figure out how to get the team details
+[ ] Fix incorrect input bug in CLI #call loop
+[ ] Test out passing the scraped rankings data to the Team Class
+[ ] Test out Scraper => Team => CLI with rankings data 
+
+#Tasks for Go-Live/Live Testing
+[ ] change the if statements in #scrape_rankings_page
+[ ] change html variable assignment in Scraper class
+
+#Potential Elements to Refactor/Add
+[ ] #scrape_rankings_page - logic for scraping women's team rankings
+[ ] CLI - use %s formatting for list view
+[ ] CLI - allow user to go back and see W or M teams after selection
 
 
 Quick summary of app
