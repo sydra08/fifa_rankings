@@ -55,6 +55,49 @@ class FifaRankings::CLI
     end
   end
 
+  def print_mens_team(rank)
+    # need to determine mens v womens here
+    # maybe 2 different methods?
+    team = FifaRankings::Team.mens_rankings[rank]
+    puts ""
+    puts "#{team.name}"
+    puts "----------------------"
+    puts "  rank:" + " #{team.rank}"
+    puts "  points:" + " #{team.points}"
+    puts "  ---"
+    puts "  confederation:" + " #{team.confederation}"
+    puts "  head coach:" + " #{team.head_coach}"
+    puts "  team captain:" + " #{team.captain}"
+    puts "  top scorer:" + " #{team.top_scorer}"
+    puts "  most caps:" + " #{team.most_caps}"
+    puts "  ---"
+    puts "  highest rank:" + " #{team.highest_rank}"
+    puts "  lowest rank" + " #{team.lowest_rank}"
+    puts "----------------------"
+  end
+
+
+  def print_womens_team(rank)
+    # need to determine mens v womens here
+    # maybe 2 different methods?
+    team = FifaRankings::Team.womens_rankings[rank]
+    puts ""
+    puts "#{team.name}"
+    puts "----------------------"
+    puts "  rank:" + " #{team.rank}"
+    puts "  points:" + " #{team.points}"
+    puts "  ---"
+    puts "  confederation:" + " #{team.confederation}"
+    puts "  head coach:" + " #{team.head_coach}"
+    puts "  team captain:" + " #{team.captain}"
+    puts "  top scorer:" + " #{team.top_scorer}"
+    puts "  most caps:" + " #{team.most_caps}"
+    puts "  ---"
+    puts "  highest rank:" + " #{team.highest_rank}"
+    puts "  lowest rank" + " #{team.lowest_rank}"
+    puts "----------------------"
+  end
+
   def details
     input = nil
     while input != "exit"
@@ -67,7 +110,7 @@ class FifaRankings::CLI
         if input.to_i > 0 && input.to_i < 21
           #make sure the input is within the correct range
           puts ""
-          puts "#{FifaRankings::Team.mens_rankings[input.to_i-1]}"
+          print_mens_team(input.to_i-1)
         elsif input == "list"
           mens_list
         else #why does this show up when exiting?
@@ -77,8 +120,7 @@ class FifaRankings::CLI
       elsif self.selection == "womens"
         if input.to_i > 0 && input.to_i < 21
           #make sure the input is within the correct range
-          puts ""
-          puts "#{FifaRankings::Team.womens_rankings[input.to_i-1]}"
+          print_womens_team(input.to_i-1)
         elsif input == "list"
           womens_list
         else #why does this show up when exiting?
