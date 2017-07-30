@@ -9,10 +9,12 @@ class FifaRankings::CLI
     if input.downcase == "m"
       self.selection = "mens"
       self.class.get_mens_teams
+      self.class.add_mens_attributes
       mens_list
     elsif input.downcase == "w"
       self.selection = "womens"
       self.class.get_womens_teams
+      self.class.add_womens_attributes
       womens_list
     else
       puts "Please try again"
@@ -28,21 +30,28 @@ class FifaRankings::CLI
   def self.get_mens_teams
     teams = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Mens-Wiki.html')
     teams = FifaRankings::Team.create_from_array(teams)
-    teams.each do |team|
-      attributes = FifaRankings::Scraper.scrape_team_page(team.team_url)
+    teams
+  end
+
+  def self.add_mens_attributes
+    FifaRankings::Team.all_mens.each do |team|
+      attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Mens-Wiki.html')
       team.add_attributes(attributes)
     end
-    teams
+    FifaRankings::Team.all_mens
   end
 
   def self.get_womens_teams
     teams = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Womens-Wiki.html')
-    teams = FifaRankings::Team.create_from_array(teams)
-    teams.each do |team|
-      attributes = FifaRankings::Scraper.scrape_team_page(team.team_url)
+    FifaRankings::Team.create_from_array(teams)
+  end
+
+  def self.add_womens_attributes
+    FifaRankings::Team.all_womens.each do |team|
+      attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
       team.add_attributes(attributes)
     end
-    teams
+    FifaRankings::Team.all_womens
   end
 
   def mens_list
