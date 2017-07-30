@@ -22,19 +22,30 @@ class FifaRankings::Scraper
     html = File.read(ranking_url)
     doc = Nokogiri::HTML(html)
     teams = []
-    # how do we increase the child # after every hash is created?
-    i = 3
-    while i < 23 #i = 22 is the last row of the table
-      team = {
-        name: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').text,
-        rank: doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).stripex,
-        movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
-        points: doc.css('table.wikitable tr')[i].css('td')[3].text,
-        team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').attribute('href').value
-      }
-      teams << team
-      i += 1
+    binding.pry
+    if ranking_url.match('/FIFA_Women/')
+      # scraping logic for womens team
+      rank = doc.css('table.wikitable tr')[2].css('td').text.slice(0,2).strip
+      movement = doc.css('table.wikitable tr')[2].css('td')[1].css('img').attribute('alt').value
+      name = doc.css('table.wikitable tr')[2].css('td')[2].css('a').text
+      points = doc.css('table.wikitable tr')[2].css('td')[3].text
+      team_url = doc.css('table.wikitable tr')[2].css('td')[2].css('a').attribute('href').value
+    else
+      #scraping logic for mens team
+      i = 3
+      while i < 23 #i = 22 is the last row of the table
+        team = {
+          name: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').text,
+          rank: doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip,
+          movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
+          points: doc.css('table.wikitable tr')[i].css('td')[3].text,
+          team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').attribute('href').value
+        }
+        teams << team
+        i += 1
+      end
     end
+
     teams
       # rank = doc.css('table.wikitable tr')[3].css('td').text.slice(0,2).strip! #=> need to only grab the first number
       #   # do a slice for the first 2 characters (since the numbers will be double digits eventually)
@@ -75,4 +86,5 @@ class FifaRankings::Scraper
   end
 
 end
-=
+
+test = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Womens-Wiki.html')
