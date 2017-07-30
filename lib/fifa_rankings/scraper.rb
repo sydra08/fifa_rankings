@@ -22,15 +22,28 @@ class FifaRankings::Scraper
     html = File.read(ranking_url)
     doc = Nokogiri::HTML(html)
     teams = []
-    binding.pry
-    if ranking_url.match('/FIFA_Women/')
+
+    if ranking_url.match(/Womens/)
+      #=> this is for the actual url: ranking_url.match(/FIFA_Women/)
       # scraping logic for womens team
-      rank = doc.css('table.wikitable tr')[2].css('td').text.slice(0,2).strip
-      movement = doc.css('table.wikitable tr')[2].css('td')[1].css('img').attribute('alt').value
-      name = doc.css('table.wikitable tr')[2].css('td')[2].css('a').text
-      points = doc.css('table.wikitable tr')[2].css('td')[3].text
-      team_url = doc.css('table.wikitable tr')[2].css('td')[2].css('a').attribute('href').value
-    else
+      i = 2
+      while i < 22
+        team = {
+          name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
+          movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
+          points: doc.css('table.wikitable tr')[i].css('td')[3].text,
+          team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('a').attribute('href').value,
+        }
+        if i < 11
+          team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,1).strip
+        else
+          team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip
+        end
+        teams << team
+        i += 1
+      end
+    elsif ranking_url.match(/Mens/)
+      #=> this is for the actual mens url: ranking_url.match('/FIFA_World_Rankings/')
       #scraping logic for mens team
       i = 3
       while i < 23 #i = 22 is the last row of the table
@@ -45,7 +58,7 @@ class FifaRankings::Scraper
         i += 1
       end
     end
-
+    binding.pry
     teams
       # rank = doc.css('table.wikitable tr')[3].css('td').text.slice(0,2).strip! #=> need to only grab the first number
       #   # do a slice for the first 2 characters (since the numbers will be double digits eventually)
