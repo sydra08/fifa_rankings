@@ -1,5 +1,4 @@
 #Steps for Building a CLI Gem
-
 [x] 1. Plan gem, imagine the interface (idea is to have a good sense of what you want to build from the user’s perspective)
 [x] 2. Start with the project structure (use google!)
 [x] 3. Start with the entry point (file run)
@@ -10,8 +9,8 @@
     [x] determine what attributes are needed
   => still need to style the interface properly
 [x] 6. Start making things real
-[ ] 7. Discover objects
-[ ] 8. Program
+[x] 7. Discover objects
+[x] 8. Program
 
 #To Do
 [x] Team Class - figure out how to put the teams in the right array based on gender
@@ -19,15 +18,19 @@
 [x] CLI - Stub out Detail view
 [ ] decide whether or not to convert the "movement" from increase/decrease/steady to up/down/none
 [x] Test out detail view for one team
-[ ] Scraper - figure out how to get the lowest rank detail item
+<!-- [ ] Scraper - figure out how to get the lowest rank detail item -->
 [ ] Scraper - Test out scraping all womens team details
 [ ] Scraper - figure out how to get the mens team details
+[ ] Scraper - adjust #scrape_team_page to account for world cup winners vs not
+  + could have a static array that lists all the womens world cup winners? - could be updated via scraping as well?
+    + W: world cup champs are referred to by "Champions" or "Winner" but still need a way to access the World Cup => Best Results row first
+  + world cup winners = i; non-winners = i-1
 [ ] Fix incorrect input bug in CLI #call loop
-[ ] Fix bug in CLI => sometimes 'exit' doesn't exit 
+[ ] Fix bug in CLI => sometimes 'exit' doesn't exit immediately and it gets stuck in a few loops before it exits
 [x] Test out passing the scraped rankings data to the Team Class
 [x] Test out Scraper => Team => CLI with rankings data
 [x] Fix bug - teams are out of order when ranked
-[x] Test out passing one team's scraped data to the Team Class
+[x] Test out passing one team's scraped data to the Team Class => this still only works for USA
 [ ] Test out passing all team scraped data to the Team Class
 [x] Test out Scraper => Team => CLI with one team's data
 [ ] Test out Scraper => Team => CLI with all team data

@@ -84,6 +84,7 @@ class FifaRankings::Scraper
       doc = Nokogiri::HTML(html)
       # binding.pry
       # association = doc.css('table.infobox tbody tr')[2].css('th').text #=> on the German W and M pages it works up until Association which is [2]
+
       # looks like teams without world cup wins have different number of preceding child elements
         # it is i-1 for the non-world cup winners (W)
 
