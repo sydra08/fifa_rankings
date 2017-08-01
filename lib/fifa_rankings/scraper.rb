@@ -28,7 +28,7 @@ class FifaRankings::Scraper
       #=> this is for the actual url: ranking_url.match(/FIFA_Women/)
       # scraping logic for womens team
       i = 2
-      while i < 12
+      while i < 22
         team = {
           name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
           movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
@@ -76,8 +76,6 @@ class FifaRankings::Scraper
 #       #   confederation:,
 #       #   most_caps:,
 #       #   top_scorer:,
-#       #   highest_rank:,
-#       #   lowest_rank:
 #       # }
 #
       html = File.read(team_url)
@@ -88,19 +86,30 @@ class FifaRankings::Scraper
       # looks like teams without world cup wins have different number of preceding child elements
         # it is i-1 for the non-world cup winners (W)
 
-      attributes = {
-        confederation: doc.css('table.infobox tbody tr')[3].css('td a').text,
-        # error says that they can't get the object, but in pry it looks ok
-        head_coach: doc.css('table.infobox tbody tr')[5].css('td a').text,
-        captain: doc.css('table.infobox tbody tr')[6].css('td a').first.text,
-        #=> only picks up the first captain. is it worth figuring out how to pick up a second if it exists?
-        most_caps: doc.css('table.infobox tbody tr')[7].css('td a').text,
-        top_scorer: doc.css('table.infobox tbody tr')[8].css('td a').text
-        # highest_rank: doc.css('table.infobox tbody tr')[16].css('td').text.slice(0,2).strip!
-      }
+      # attributes = {
+      #   confederation: doc.css('table.infobox tbody tr')[3].css('td a').text,
+      #   # error says that they can't get the object, but in pry it looks ok
+      #   head_coach: doc.css('table.infobox tbody tr')[5].css('td a').text,
+      #   captain: doc.css('table.infobox tbody tr')[6].css('td a').first.text,
+      #   #=> only picks up the first captain. is it worth figuring out how to pick up a second if it exists?
+      #   most_caps: doc.css('table.infobox tbody tr')[7].css('td a').text,
+      #   top_scorer: doc.css('table.infobox tbody tr')[8].css('td a').text
+      # }
+
+      x, i = 0, 0
+      attributes = {}
+      keys = ["Confederation", "Head coach", "Captain", "Most caps", "Top scorer"]
+      while attributes.length < 5
+        if doc.css('table.infobox tbody tr')[i].css('th').text == keys[x]
+          attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td a').first.text
+          # if the attribute is unavailable, just put "unavailable" ? 
+          x += 1
+        else
+          i += 1
+        end
+      end
 
       attributes
-      # lowest_rank = doc.css('table.infobox tbody tr')[17].css('td').text.slice(0,2).strip! #=> this is returning a nil class error. for some reason the html for this element exists but nokogiri is coming up empty
   end
 
 end
