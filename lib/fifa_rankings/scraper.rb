@@ -28,7 +28,7 @@ class FifaRankings::Scraper
       #=> this is for the actual url: ranking_url.match(/FIFA_Women/)
       # scraping logic for womens team
       i = 2
-      while i < 22
+      while i < 12
         team = {
           name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
           movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
@@ -96,14 +96,47 @@ class FifaRankings::Scraper
       #   top_scorer: doc.css('table.infobox tbody tr')[8].css('td a').text
       # }
 
+
+      # still haven't captured all the scenarios that throw errors when trying to iterate thru teams
+      # need to break down all of the points where an error can happen => use pry?
+        # doc.css('table.infobox tbody tr')[i]
+        # doc.css('table.infobox tbody tr')[i].css('th')
+        # doc.css('table.infobox tbody tr')[i].css('th').text
+        # doc.css('table.infobox tbody tr')[i].css('td a')
+        # doc.css('table.infobox tbody tr')[i].css('td a').text
+
+      # attributes = {confederation: "unavailable", head_coach: "unavailable", captain: "unavailable", most_caps: "unavailable", top_scorer: "unavailable"}
+      # attributes.keys.each do |key|
+      #   i = 1
+      #   while i < 12
+      #     if doc.css('table.infobox tbody tr')[i].respond_to?(:css) == false && doc.css('table.infobox tbody tr')[i].css('td a').respond_to?(:css) == false
+      #       i += 1
+      #     elsif doc.css('table.infobox tbody tr')[i].respond_to?(:css) && doc.css('table.infobox tbody tr')[i].css('td a').respond_to?(:text)
+      #       if doc.css('table.infobox tbody tr')[i].css('th').text.downcase.gsub(" ","_").to_sym == key
+      #         attributes[key] = doc.css('table.infobox tbody tr')[i].css('td a').first.text
+      #       end
+      #       i += 1
+      #     end
+      #   end
+      # end
+      #
+
       x, i = 0, 0
       attributes = {}
       keys = ["Confederation", "Head coach", "Captain", "Most caps", "Top scorer"]
       while attributes.length < 5
         if doc.css('table.infobox tbody tr')[i].css('th').text == keys[x]
           attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td a').first.text
-          # if the attribute is unavailable, just put "unavailable" ? 
           x += 1
+        elsif doc.css('table.infobox tbody tr')[i].css('th').text == NoMethodError
+          # add error handling to see which teams this is breaking for
+          attributes[keys[x].downcase.gsub(" ","_").to_sym] = "unavailable"
+          x += 1
+
+          # if the attribute is unavailable, just put "unavailable" ?
+          # if NoMethodError do xyz else run the program?
+          # what about iterating thru the first 10-15 rows, picking out the data, and then only taking what matches?
+            # use the mass assignment idea? take whatever you can get and then only assign what you want?
         else
           i += 1
         end

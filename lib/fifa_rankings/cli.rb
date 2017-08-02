@@ -14,7 +14,7 @@ class FifaRankings::CLI
     elsif input.downcase == "w"
       self.selection = "womens"
       self.class.get_womens_teams
-      # self.class.add_womens_attributes
+      self.class.add_womens_attributes
       womens_list
     else
       puts "Please try again"
@@ -46,13 +46,14 @@ class FifaRankings::CLI
     FifaRankings::Team.create_from_array(teams)
   end
 
-  # def self.add_womens_attributes
-  #   FifaRankings::Team.all_womens.each do |team|
-  #     attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
-  #     team.add_attributes(attributes)
-  #   end
-  #   FifaRankings::Team.all_womens
-  # end
+  def self.add_womens_attributes
+    # this fails bc it cannot scrape all of the data properly
+    FifaRankings::Team.all_womens.each do |team|
+      attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
+      team.add_attributes(attributes)
+    end
+    FifaRankings::Team.all_womens
+  end
 
   def mens_list
     puts ""

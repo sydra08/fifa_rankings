@@ -21,7 +21,7 @@
 <!-- [ ] Scraper - figure out how to get the lowest rank detail item -->
 [ ] Scraper - Test out scraping all womens team details
 [ ] Scraper - figure out how to get the mens team details
-[ ] Scraper - adjust #scrape_team_page to account for world cup winners vs not
+[x] Scraper - adjust #scrape_team_page to account for world cup winners vs not
   + could have a static array that lists all the womens world cup winners? - could be updated via scraping as well?
     + W: world cup champs are referred to by "Champions" or "Winner" but still need a way to access the World Cup => Best Results row first
   + world cup winners = i; non-winners = i-1
