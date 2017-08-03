@@ -14,7 +14,7 @@
 
 #To Do
 [x] Team Class - figure out how to put the teams in the right array based on gender
-[ ] Re-evaluate the team details that I want to display
+[x] Re-evaluate the team details that I want to display
 [x] CLI - Stub out Detail view
 [ ] decide whether or not to convert the "movement" from increase/decrease/steady to up/down/none
 [x] Test out detail view for one team
@@ -34,6 +34,8 @@
 [ ] Test out passing all team scraped data to the Team Class
 [x] Test out Scraper => Team => CLI with one team's data
 [ ] Test out Scraper => Team => CLI with all team data
+[ ] CLI - bug in #details loop - typing something incorrectly means you need to type exit multiple times in order to exit the loop
+[ ] CLI - bug in #details loop - incorrect input message shows up when exiting
 
 #Tasks for Go-Live/Live Testing
 [ ] change the if statements in #scrape_rankings_page
@@ -42,7 +44,7 @@
 
 #Potential Elements to Refactor/Add
 [ ] #scrape_rankings_page - logic for scraping women's team rankings
-[ ] CLI - use %s formatting for list view
+[x] CLI - use %s formatting for list view
 [ ] CLI - allow user to go back and see W or M teams after selection
 [ ] revisit assigning team's gender - should it go in the scraper? should it be done elsewhere?
 [ ] squash some commits?

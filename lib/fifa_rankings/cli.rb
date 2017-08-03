@@ -2,7 +2,7 @@
 
 class FifaRankings::CLI
   attr_accessor :selection
-  @@format = '%-4s %-15s %-6s %-10s'
+  @@format = '%-6s %-14s %-8s %-10s'
 
   def call
     puts "Welcome! If you would like to see the FIFA Men's World Rankings, type M. If you would like to see the FIFA Women's World Rankings, type W."
@@ -47,20 +47,24 @@ class FifaRankings::CLI
     FifaRankings::Team.create_from_array(teams)
   end
 
-  # def self.add_womens_attributes
-  #   # this fails bc it cannot scrape all of the data properly
-  #   FifaRankings::Team.all_womens.each do |team|
-  #     attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
-  #     team.add_attributes(attributes)
-  #   end
-  #   FifaRankings::Team.all_womens
-  # end
+  def self.add_womens_attributes
+    # this fails bc it cannot scrape all of the data properly
+    FifaRankings::Team.all_womens.each do |team|
+      attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/United States-Womens-Wiki.html')
+      # './fixtures/' + team.name + '-Womens-Wiki.html'
+      team.add_attributes(attributes)
+    end
+    FifaRankings::Team.all_womens
+  end
 
   def mens_list
     puts ""
     puts ""
     puts "FIFA Men's World Rankings"
-    puts @@format % ["Rank", "Team", "Points", "Change"]
+    puts "-------------------------"
+    puts ""
+    puts @@format % ["RANK", "TEAM", "POINTS", "CHANGE"]
+    # ["Rank", "Team", "Points", "Change"]
     # "Rank   Team - Points - Change"
     FifaRankings::Team.mens_rankings.each.with_index(1) do |team, i|
       puts @@format % [i, team.name, team.points, team.movement]
@@ -72,7 +76,9 @@ class FifaRankings::CLI
     puts ""
     puts ""
     puts "FIFA Women's World Rankings"
-    puts @@format % ["Rank", "Team", "Points", "Change"]
+    puts "---------------------------"
+    puts ""
+    puts @@format % ["RANK", "TEAM", "POINTS", "CHANGE"]
     FifaRankings::Team.womens_rankings.each.with_index(1) do |team, i|
       puts @@format % [i, team.name, team.points, team.movement]
       # "#{i}.  #{team.name} - #{team.points} - #{team.movement}"
@@ -86,16 +92,13 @@ class FifaRankings::CLI
     puts ""
     puts "  #{team.name}"
     puts "-----------------"
-    puts "  rank:" + " #{team.rank}"
-    puts "  points:" + " #{team.points}"
-    puts "  confederation:" + " #{team.confederation}"
-    puts "  head coach:" + " #{team.head_coach}"
-    puts "  team captain:" + " #{team.captain}"
-    puts "  top scorer:" + " #{team.top_scorer}"
-    puts "  most caps:" + " #{team.most_caps}"
-    # puts "  ---"
-    # puts "  highest rank:" + " #{team.highest_rank}"
-    # puts "  lowest rank" + " #{team.lowest_rank}"
+    puts "  Rank:" + " #{team.rank}"
+    puts "  Points:" + " #{team.points}"
+    puts "  Confederation:" + " #{team.confederation}"
+    puts "  Head coach:" + " #{team.head_coach}"
+    puts "  Team captain:" + " #{team.captain}"
+    puts "  Top scorer:" + " #{team.top_scorer}"
+    puts "  Most caps:" + " #{team.most_caps}"
     puts "-----------------"
   end
 
@@ -107,14 +110,13 @@ class FifaRankings::CLI
     puts ""
     puts "  #{team.name}"
     puts "----------------------"
-    puts "  rank:" + " #{team.rank}"
-    puts "  points:" + " #{team.points}"
-    puts "  ---"
-    puts "  confederation:" + " #{team.confederation}"
-    puts "  head coach:" + " #{team.head_coach}"
-    puts "  team captain:" + " #{team.captain}"
-    puts "  top scorer:" + " #{team.top_scorer}"
-    puts "  most caps:" + " #{team.most_caps}"
+    puts "  Rank:" + " #{team.rank}"
+    puts "  Points:" + " #{team.points}"
+    puts "  Confederation:" + " #{team.confederation}"
+    puts "  Head coach:" + " #{team.head_coach}"
+    puts "  Team captain:" + " #{team.captain}"
+    puts "  Top scorer:" + " #{team.top_scorer}"
+    puts "  Most caps:" + " #{team.most_caps}"
     # puts "  ---"
     # puts "  highest rank:" + " #{team.highest_rank}"
     # puts "  lowest rank" + " #{team.lowest_rank}"
@@ -137,6 +139,7 @@ class FifaRankings::CLI
         elsif input == "list"
           mens_list
         else #why does this show up when exiting?
+          # also if you type something incorrectly then you need to type exit multiple times before you can exit
           puts ""
           puts "Incorrect input, please try again."
         end
