@@ -28,7 +28,7 @@ class FifaRankings::Scraper
       #=> this is for the actual url: ranking_url.match(/FIFA_Women/)
       # scraping logic for womens team
       i = 2
-      while i < 12
+      while i < 22
         team = {
           name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
           movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,

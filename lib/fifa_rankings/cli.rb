@@ -2,6 +2,7 @@
 
 class FifaRankings::CLI
   attr_accessor :selection
+  @@format = '%-4s %-15s %-6s %-10s'
 
   def call
     puts "Welcome! If you would like to see the FIFA Men's World Rankings, type M. If you would like to see the FIFA Women's World Rankings, type W."
@@ -14,7 +15,7 @@ class FifaRankings::CLI
     elsif input.downcase == "w"
       self.selection = "womens"
       self.class.get_womens_teams
-      self.class.add_womens_attributes
+      # self.class.add_womens_attributes
       womens_list
     else
       puts "Please try again"
@@ -46,22 +47,24 @@ class FifaRankings::CLI
     FifaRankings::Team.create_from_array(teams)
   end
 
-  def self.add_womens_attributes
-    # this fails bc it cannot scrape all of the data properly
-    FifaRankings::Team.all_womens.each do |team|
-      attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
-      team.add_attributes(attributes)
-    end
-    FifaRankings::Team.all_womens
-  end
+  # def self.add_womens_attributes
+  #   # this fails bc it cannot scrape all of the data properly
+  #   FifaRankings::Team.all_womens.each do |team|
+  #     attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
+  #     team.add_attributes(attributes)
+  #   end
+  #   FifaRankings::Team.all_womens
+  # end
 
   def mens_list
     puts ""
     puts ""
     puts "FIFA Men's World Rankings"
-    puts "Rank   Team - Points - Change"
+    puts @@format % ["Rank", "Team", "Points", "Change"]
+    # "Rank   Team - Points - Change"
     FifaRankings::Team.mens_rankings.each.with_index(1) do |team, i|
-      puts "#{i}.   #{team.name} - #{team.points} - #{team.movement}"
+      puts @@format % [i, team.name, team.points, team.movement]
+      # "#{i}.  #{team.name} - #{team.points} - #{team.movement}"
     end
   end
 
@@ -69,9 +72,10 @@ class FifaRankings::CLI
     puts ""
     puts ""
     puts "FIFA Women's World Rankings"
-    puts "Rank   Team - Points - Change"
+    puts @@format % ["Rank", "Team", "Points", "Change"]
     FifaRankings::Team.womens_rankings.each.with_index(1) do |team, i|
-      puts "#{i}.   #{team.name} - #{team.points} - #{team.movement}"
+      puts @@format % [i, team.name, team.points, team.movement]
+      # "#{i}.  #{team.name} - #{team.points} - #{team.movement}"
     end
   end
 
@@ -142,7 +146,7 @@ class FifaRankings::CLI
           print_womens_team(input.to_i-1)
         elsif input == "list"
           womens_list
-        else #why does this show up when exiting?
+        else
           puts ""
           puts "Incorrect input, please try again."
         end
