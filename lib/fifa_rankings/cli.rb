@@ -4,18 +4,18 @@ class FifaRankings::CLI
   attr_accessor :selection
   @@format = '%-6s %-14s %-8s %-10s'
 
+  def welcome
+    puts "Welcome!"
+  end
+
   def call
-    puts "Welcome! If you would like to see the FIFA Men's World Rankings, type M. If you would like to see the FIFA Women's World Rankings, type W."
+    welcome
+    puts "If you would like to see the FIFA Men's World Rankings, type M. If you would like to see the FIFA Women's World Rankings, type W."
+    # have a loading message?
     input = gets.chomp
     if input.downcase == "m"
-      self.selection = "mens"
-      self.class.get_mens_teams
-      # self.class.add_mens_attributes
       mens_list
     elsif input.downcase == "w"
-      self.selection = "womens"
-      self.class.get_womens_teams
-      # self.class.add_womens_attributes
       womens_list
     else
       puts "Please try again"
@@ -58,7 +58,10 @@ class FifaRankings::CLI
   end
 
   def mens_list
-    puts ""
+    self.selection = "mens"
+    self.class.get_mens_teams
+    self.class.add_mens_attributes
+
     puts ""
     puts "FIFA Men's World Rankings"
     puts "-------------------------"
@@ -73,7 +76,10 @@ class FifaRankings::CLI
   end
 
   def womens_list
-    puts ""
+    self.selection = "womens"
+    self.class.get_womens_teams
+    self.class.add_womens_attributes
+
     puts ""
     puts "FIFA Women's World Rankings"
     puts "---------------------------"
@@ -89,6 +95,7 @@ class FifaRankings::CLI
     # need to determine mens v womens here
     # maybe 2 different methods?
     team = FifaRankings::Team.mens_rankings[rank]
+      # new Team method of #find_by_input
     puts ""
     puts "  #{team.name}"
     puts "-----------------"
@@ -104,12 +111,12 @@ class FifaRankings::CLI
 
 
   def print_womens_team(rank)
-    # need to determine mens v womens here
-    # maybe 2 different methods?
+    # maybe get rid of the dashes because the unevenness will annoy me?
     team = FifaRankings::Team.womens_rankings[rank]
+      # new Team method of #find_by_input 
     puts ""
     puts "  #{team.name}"
-    puts "----------------------"
+    puts "--------------------------------"
     puts "  Rank:" + " #{team.rank}"
     puts "  Points:" + " #{team.points}"
     puts "  Confederation:" + " #{team.confederation}"
@@ -120,7 +127,7 @@ class FifaRankings::CLI
     # puts "  ---"
     # puts "  highest rank:" + " #{team.highest_rank}"
     # puts "  lowest rank" + " #{team.lowest_rank}"
-    puts "----------------------"
+    puts "--------------------------------"
   end
 
   def details
@@ -131,8 +138,9 @@ class FifaRankings::CLI
       puts "Enter the rank of the team that you would like more info on, type 'list' to see whole list, or type 'exit' to leave"
       # maybe add the ability to choose from the mens or womens again?
       input = gets.chomp.downcase
+      # can these 2 things be combined?
       if self.selection == "mens"
-        if input.to_i > 0 && input.to_i < 21
+        if input.to_i.between?(0,FifaRankings::Team.all_mens.size)
           #make sure the input is within the correct range
           puts ""
           print_mens_team(input.to_i-1)
@@ -144,7 +152,7 @@ class FifaRankings::CLI
           puts "Incorrect input, please try again."
         end
       elsif self.selection == "womens"
-        if input.to_i > 0 && input.to_i < 21
+        if input.to_i.between?(0,FifaRankings::Team.all_womens.size)
           #make sure the input is within the correct range
           print_womens_team(input.to_i-1)
         elsif input == "list"

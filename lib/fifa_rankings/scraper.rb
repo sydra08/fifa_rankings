@@ -29,6 +29,15 @@ class FifaRankings::Scraper
       # scraping logic for womens team
       i = 2
       while i < 22
+        # doc.css('table.wikitable tr')[i].css('td').collect do |attribute|
+        #   team = {
+        #     name: attribute[2].css('a'),text,
+        #     movement: attribute[1].css('img').attribute('alt').value,
+        #     points: attribute[3].text,
+        #     team_url: attribute[2].css('a').attribute('href').value,
+        #     gender: "womens"
+        #   }
+        # end
         team = {
           name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
           movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,

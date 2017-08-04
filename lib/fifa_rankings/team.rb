@@ -9,7 +9,7 @@
 
 
 class FifaRankings::Team
-  attr_accessor :name, :head_coach, :confederation, :rank, :points, :captain, :movement, :most_caps, :top_scorer, :team_url, :gender #:highest_rank, :lowest_rank, 
+  attr_accessor :name, :head_coach, :confederation, :rank, :points, :captain, :movement, :most_caps, :top_scorer, :team_url, :gender #:highest_rank, :lowest_rank,
 
   @@mens_teams = []
   @@womens_teams = []
@@ -60,5 +60,13 @@ class FifaRankings::Team
   def self.all_womens
     @@womens_teams
   end
+
+  # def find_womens_team(rank)
+  #   self.class.womens_teams[rank.to_i-1]
+  # end
+  #
+  # def find_mens_team(rank)
+  #   self.class.mens_teams[rank.to_i-1]
+  # end
 
 end

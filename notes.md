@@ -42,12 +42,13 @@
 [ ] change html variable assignment in Scraper#scrape_rankings_page
 [ ] change the html variable assignment Scraper#scrape_team_page
 
-#Potential Elements to Refactor/Add
+#Potential Elements to Refactor/Add/Change
 [ ] #scrape_rankings_page - logic for scraping women's team rankings
 [x] CLI - use %s formatting for list view
 [ ] CLI - allow user to go back and see W or M teams after selection
 [ ] revisit assigning team's gender - should it go in the scraper? should it be done elsewhere?
 [ ] squash some commits?
+[ ] CLI - maybe get rid of the dashes in the detail view because the unevenness will annoy me?
 
 
 Quick summary of app
