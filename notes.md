@@ -19,7 +19,7 @@
 [ ] decide whether or not to convert the "movement" from increase/decrease/steady to up/down/none
 [x] Test out detail view for one team
 <!-- [ ] Scraper - figure out how to get the lowest rank detail item -->
-[ ] Scraper - Test out scraping all womens team details
+[x] Scraper - Test out scraping all womens team details
 [ ] Scraper - figure out how to get the mens team details
 [x] Scraper - adjust #scrape_team_page to account for world cup winners vs not
   + could have a static array that lists all the womens world cup winners? - could be updated via scraping as well?
@@ -33,9 +33,13 @@
 [x] Test out passing one team's scraped data to the Team Class => this still only works for USA
 [ ] Test out passing all team scraped data to the Team Class
 [x] Test out Scraper => Team => CLI with one team's data
-[ ] Test out Scraper => Team => CLI with all team data
+[x] Test out Scraper => Team => CLI with all team data
 [ ] CLI - bug in #details loop - typing something incorrectly means you need to type exit multiple times in order to exit the loop
 [ ] CLI - bug in #details loop - incorrect input message shows up when exiting
+[ ] CLI - add loading message? data takes a while to load
+[ ] Scraper - clean up attributes data
+  [ ] sometimes the [ ] ref number shows up at the end of a row
+  [ ] if there's more than one player for that property then it shows up on 2 lines
 
 #Tasks for Go-Live/Live Testing
 [ ] change the if statements in #scrape_rankings_page
