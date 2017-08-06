@@ -9,10 +9,9 @@
 
 
 class FifaRankings::Team
-  attr_accessor :name, :head_coach, :confederation, :rank, :points, :captain, :movement, :most_caps, :top_scorer, :team_url, :gender #:highest_rank, :lowest_rank,
+  attr_accessor :name, :head_coach, :confederation, :rank, :points, :captain, :movement, :most_caps, :top_scorer, :team_url
 
-  @@mens_teams = []
-  @@womens_teams = []
+  @@all = []
 
   def initialize(team_hash)
     # instantiate a Team instance and if it's "mens" add it to the mens array, else add it to the womens array
@@ -20,12 +19,8 @@ class FifaRankings::Team
     team_hash.each do |k,v|
       self.send(("#{k}="),v)
     end
-    # if it's a mens team add it to the mens array, else add it to the womens array
-    if self.gender == "mens"
-      @@mens_teams << self
-    elsif self.gender == "womens"
-      @@womens_teams << self
-    end
+    @@all << self
+
   end
 
   def self.create_from_array(array)
@@ -42,31 +37,18 @@ class FifaRankings::Team
     self
   end
 
-  def self.mens_rankings
-    # display the mens teams sorted by ranking
-    # tested that this works with faked data
-    self.all_mens.sort_by {|team| team.rank.to_i}
-  end
-
-  def self.womens_rankings
+  def self.sort_by_rankings
     # display the womens teams sorted by ranking
-    self.all_womens.sort_by {|team| team.rank.to_i}
+    self.all.sort_by {|team| team.rank.to_i}
   end
 
-  def self.all_mens
-    @@mens_teams
+  def self.all
+    @@all
   end
 
-  def self.all_womens
-    @@womens_teams
+  def self.find_by_rank(rank)
+    self.all.detect {|team| team.rank.to_i == rank}
   end
 
-  # def find_womens_team(rank)
-  #   self.class.womens_teams[rank.to_i-1]
-  # end
-  #
-  # def find_mens_team(rank)
-  #   self.class.mens_teams[rank.to_i-1]
-  # end
 
 end

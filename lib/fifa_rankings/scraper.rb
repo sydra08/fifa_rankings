@@ -24,55 +24,32 @@ class FifaRankings::Scraper
     html = File.read(ranking_url)
     doc = Nokogiri::HTML(html)
     teams = []
-    # binding.pry
-    if ranking_url.match(/Womens/)
-      #=> this is for the actual url: ranking_url.match(/FIFA_Women/)
-      # scraping logic for womens team
-      i = 2
-      while i < 22
-        # doc.css('table.wikitable tr')[i].css('td').collect do |attribute|
-        #   team = {
-        #     name: attribute[2].css('a'),text,
-        #     movement: attribute[1].css('img').attribute('alt').value,
-        #     points: attribute[3].text,
-        #     team_url: attribute[2].css('a').attribute('href').value,
-        #     gender: "womens"
-        #   }
-        # end
-        team = {
-          name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
-          movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
-          points: doc.css('table.wikitable tr')[i].css('td')[3].text,
-          team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('a').attribute('href').value,
-          gender: "womens"
-        }
-        # can this be handled in a better way?
-        if i < 11
-          team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,1).strip
-        else
-          team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip
-        end
-        teams << team
-        i += 1
+    i = 2 #should this be more abstract somehow?
+    while i < 22 #change this to just be based on the table size
+      # doc.css('table.wikitable tr')[i].css('td').collect do |attribute|
+      #   team = {
+      #     name: attribute[2].css('a'),text,
+      #     movement: attribute[1].css('img').attribute('alt').value,
+      #     points: attribute[3].text,
+      #     team_url: attribute[2].css('a').attribute('href').value,
+      #     gender: "womens"
+      #   }
+      # end
+      team = {
+        name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
+        movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
+        points: doc.css('table.wikitable tr')[i].css('td')[3].text,
+        team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('a').attribute('href').value,
+      }
+      # can this be handled in a better way?
+      if i < 11
+        team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,1).strip
+      else
+        team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip
       end
-    elsif ranking_url.match(/Mens/)
-      #=> this is for the actual mens url: ranking_url.match('/FIFA_World_Rankings/')
-      #scraping logic for mens team
-      i = 3
-      while i < 23
-        team = {
-          name: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').text,
-          rank: doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip,
-          movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
-          points: doc.css('table.wikitable tr')[i].css('td')[3].text,
-          team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('span a').attribute('href').value,
-          gender: "mens"
-        }
-        teams << team
-        i += 1
-      end
-    end
-
+      teams << team
+      i += 1
+      end #end of while loop
     teams
   end #end of scrape_rankings_page
 
@@ -100,7 +77,7 @@ class FifaRankings::Scraper
       while doc.css('table.infobox tbody tr')[i].css('th').text != "FIFA code"
         # stops looking when it gets to the FIFA code row (this does mean my program could break if Wikipedia decides to change the table order)
         # is it worth refactoring to have the keys not be an array?
-          # the attributes hash would already be set up with the desired properties and then get filled in when there's a match? 
+          # the attributes hash would already be set up with the desired properties and then get filled in when there's a match?
         if doc.css('table.infobox tbody tr')[i].css('th').text == keys[x]
           attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').first.text
           x += 1
