@@ -1,7 +1,7 @@
 #CLI controller
 
 class FifaRankings::CLI
-  @@format = '%-6s %-14s %-8s %-10s' #not sure if this is the best way to represent this
+  @@format = '%-6s %-14s %-10s' #not sure if this is the best way to represent this
 
   def welcome
     puts "Welcome!"
@@ -35,14 +35,13 @@ class FifaRankings::CLI
   end
 
   def list
-
     puts ""
     puts "FIFA Women's World Rankings"
     puts "---------------------------"
     puts ""
-    puts @@format % ["RANK", "TEAM", "POINTS", "CHANGE"]
+    puts @@format % ["RANK", "TEAM", "CHANGE"]
     FifaRankings::Team.sort_by_rankings.each.with_index(1) do |team, i|
-      puts @@format % [i, team.name, team.points, team.movement]
+      puts @@format % [i, team.name, team.movement]
     end
   end
 
@@ -51,7 +50,6 @@ class FifaRankings::CLI
     team = FifaRankings::Team.find_by_rank(rank)
     # seems like ||= would be really good here but not sure how to incorporate it just yet
 
-    # getting the data for the team goes faster than when you get it all at the beginning
     puts ""
     puts "  #{team.name}"
     puts "--------------------------------"
@@ -78,7 +76,7 @@ class FifaRankings::CLI
         print_team(input.to_i)
       elsif input == "list"
         list
-      else
+      elsif input != "exit"
         puts ""
         puts "Incorrect input, please try again."
       end
@@ -86,7 +84,8 @@ class FifaRankings::CLI
   end #end of details
 
   def goodbye
-    puts "Goodbye!"
+    puts ""
+    puts "Goodbye! Come back to see the updated rankings soon."
   end
 
 end #end of CLI class
