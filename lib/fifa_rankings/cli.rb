@@ -2,7 +2,7 @@
 
 class FifaRankings::CLI
   attr_accessor :selection
-  @@format = '%-6s %-14s %-8s %-10s'
+  @@format = '%-6s %-14s %-8s %-10s' #not sure if this is the best way to represent this  %-8s %-10s
 
   def welcome
     puts "Welcome!"
@@ -28,7 +28,7 @@ class FifaRankings::CLI
   # want to clean the output up a bit and make it look nicer - consider this:
   # https://stackoverflow.com/questions/19068075/output-an-array-of-objects-to-terminal-as-a-table-with-attributes-in-fixed-widt
 
-  def self.get_mens_teams
+  def self.get_mens_teams #maybe the logic of men/women should be in the scraper? | should I prime the program and do this at the beginning vs when the user asks for it?
     teams = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Mens-Wiki.html')
     teams = FifaRankings::Team.create_from_array(teams)
     teams
@@ -42,7 +42,7 @@ class FifaRankings::CLI
   #   FifaRankings::Team.all_mens
   # end
 
-  def self.get_womens_teams
+  def self.get_womens_teams #maybe the logic of men/women should be in the scraper? | should I prime the program and do this at the beginning vs when the user asks for it?
     teams = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Womens-Wiki.html')
     FifaRankings::Team.create_from_array(teams)
   end
@@ -56,6 +56,22 @@ class FifaRankings::CLI
     end
     FifaRankings::Team.all_womens
   end
+
+  #list can be one method and have 1 arguments?
+  # def list(gender)
+  #   if gender == "mens"
+  #     puts "FIFA Men's World Rankings"
+  #   elsif gender == "womens"
+  #     puts "FIFA Women's World Rankings"
+  #   end
+  #   puts "-------------------------"
+  #   puts ""
+  #   puts @@format % ["RANK", "TEAM", "POINTS", "CHANGE"]
+  #   FifaRankings::Team.mens_rankings.each.with_index(1) do |team, i| => need the method to be more flexible...maybe pass an argument to #rankings(gender)?
+  #     puts @@format % [i, team.name, team.points, team.movement]
+  #     # "#{i}.  #{team.name} - #{team.points} - #{team.movement}"
+  #   end
+  # end
 
   def mens_list
     self.selection = "mens"
@@ -94,8 +110,7 @@ class FifaRankings::CLI
   def print_mens_team(rank)
     # need to determine mens v womens here
     # maybe 2 different methods?
-    team = FifaRankings::Team.mens_rankings[rank]
-      # new Team method of #find_by_input
+    team = FifaRankings::Team.mens_rankings[rank] #maybe need Team#find_by_rank(rank)
     puts ""
     puts "  #{team.name}"
     puts "-----------------"
@@ -112,8 +127,7 @@ class FifaRankings::CLI
 
   def print_womens_team(rank)
     # maybe get rid of the dashes because the unevenness will annoy me?
-    team = FifaRankings::Team.womens_rankings[rank]
-      # new Team method of #find_by_input 
+    team = FifaRankings::Team.womens_rankings[rank] #maybe need Team#find_by_rank(rank)
     puts ""
     puts "  #{team.name}"
     puts "--------------------------------"
