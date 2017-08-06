@@ -102,7 +102,7 @@ class FifaRankings::CLI
     puts ""
     puts @@format % ["RANK", "TEAM", "POINTS", "CHANGE"]
     FifaRankings::Team.womens_rankings.each.with_index(1) do |team, i|
-      puts @@format % [i, team.name, team.points, team.movement]
+      puts @@format % [i, team.name, team.points, 3team.movement]
       # "#{i}.  #{team.name} - #{team.points} - #{team.movement}"
     end
   end
