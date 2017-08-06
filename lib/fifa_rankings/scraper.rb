@@ -97,8 +97,10 @@ class FifaRankings::Scraper
       x, i = 0, 0
       attributes = {}
       keys = ["Confederation", "Head coach", "Captain", "Most caps", "Top scorer"]
-      while attributes.length < 5
-
+      while doc.css('table.infobox tbody tr')[i].css('th').text != "FIFA code"
+        # stops looking when it gets to the FIFA code row (this does mean my program could break if Wikipedia decides to change the table order)
+        # is it worth refactoring to have the keys not be an array?
+          # the attributes hash would already be set up with the desired properties and then get filled in when there's a match? 
         if doc.css('table.infobox tbody tr')[i].css('th').text == keys[x]
           attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').first.text
           x += 1
