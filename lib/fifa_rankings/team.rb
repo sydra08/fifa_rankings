@@ -37,7 +37,7 @@ class FifaRankings::Team
     self
   end
 
-  def self.sort_by_rankings
+  def self.sort_by_rank
     # display the womens teams sorted by ranking
     self.all.sort_by {|team| team.rank.to_i}
   end
@@ -47,7 +47,7 @@ class FifaRankings::Team
   end
 
   def self.find_by_rank(rank)
-    self.all.detect {|team| team.rank.to_i == rank}
+    self.all.detect {|team| team.rank == rank}
   end
 
 

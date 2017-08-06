@@ -20,37 +20,33 @@
 [x] Test out detail view for one team
 <!-- [ ] Scraper - figure out how to get the lowest rank detail item -->
 [x] Scraper - Test out scraping all womens team details
-[ ] Scraper - figure out how to get the mens team details
 [x] Scraper - adjust #scrape_team_page to account for world cup winners vs not
   + could have a static array that lists all the womens world cup winners? - could be updated via scraping as well?
     + W: world cup champs are referred to by "Champions" or "Winner" but still need a way to access the World Cup => Best Results row first
   + world cup winners = i; non-winners = i-1
-[ ] Fix incorrect input bug in CLI #call loop
-[ ] Fix bug in CLI => sometimes 'exit' doesn't exit immediately and it gets stuck in a few loops before it exits
+[x] Fix incorrect input bug in CLI #call loop
+[x] Fix bug in CLI => sometimes 'exit' doesn't exit immediately and it gets stuck in a few loops before it exits
 [x] Test out passing the scraped rankings data to the Team Class
 [x] Test out Scraper => Team => CLI with rankings data
 [x] Fix bug - teams are out of order when ranked
 [x] Test out passing one team's scraped data to the Team Class => this still only works for USA
-[ ] Test out passing all team scraped data to the Team Class
+[x] Test out passing all team scraped data to the Team Class
 [x] Test out Scraper => Team => CLI with one team's data
 [x] Test out Scraper => Team => CLI with all team data
-[ ] CLI - bug in #details loop - typing something incorrectly means you need to type exit multiple times in order to exit the loop
-[ ] CLI - bug in #details loop - incorrect input message shows up when exiting
-[ ] CLI - add loading message? data takes a while to load
+[x] CLI - bug in #details loop - typing something incorrectly means you need to type exit multiple times in order to exit the loop
+[x] CLI - bug in #details loop - incorrect input message shows up when exiting
+[x] CLI - add loading message? data takes a while to load
 [ ] Scraper - clean up attributes data
   [ ] sometimes the [ ] ref number shows up at the end of a row
   [ ] if there's more than one player for that property then it shows up on 2 lines
 
 #Tasks for Go-Live/Live Testing
-[ ] change the if statements in #scrape_rankings_page
 [ ] change html variable assignment in Scraper#scrape_rankings_page
 [ ] change the html variable assignment Scraper#scrape_team_page
 
 #Potential Elements to Refactor/Add/Change
 [ ] #scrape_rankings_page - logic for scraping women's team rankings
 [x] CLI - use %s formatting for list view
-[ ] CLI - allow user to go back and see W or M teams after selection
-[ ] revisit assigning team's gender - should it go in the scraper? should it be done elsewhere?
 [ ] squash some commits?
 [ ] CLI - maybe get rid of the dashes in the detail view because the unevenness will annoy me?
 

@@ -40,7 +40,7 @@ class FifaRankings::CLI
     puts "---------------------------"
     puts ""
     puts @@format % ["RANK", "TEAM", "CHANGE"]
-    FifaRankings::Team.sort_by_rankings.each.with_index(1) do |team, i|
+    FifaRankings::Team.sort_by_rank.each.with_index(1) do |team, i|
       puts @@format % [i, team.name, team.movement]
     end
   end

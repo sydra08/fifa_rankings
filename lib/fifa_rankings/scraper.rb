@@ -38,14 +38,14 @@ class FifaRankings::Scraper
       team = {
         name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
         movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
-        points: doc.css('table.wikitable tr')[i].css('td')[3].text,
+        points: doc.css('table.wikitable tr')[i].css('td')[3].text.to_i,
         team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('a').attribute('href').value,
       }
       # can this be handled in a better way?
       if i < 11
-        team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,1).strip
+        team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,1).strip.to_i
       else
-        team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip
+        team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip.to_i
       end
       teams << team
       i += 1
@@ -77,15 +77,30 @@ class FifaRankings::Scraper
       while doc.css('table.infobox tbody tr')[i].css('th').text != "FIFA code"
         # stops looking when it gets to the FIFA code row (this does mean my program could break if Wikipedia decides to change the table order)
         # is it worth refactoring to have the keys not be an array?
-          # the attributes hash would already be set up with the desired properties and then get filled in when there's a match?
+          # the attributes hash would already be set up with the desired properties and then get filled in when there's a match
         if doc.css('table.infobox tbody tr')[i].css('th').text == keys[x]
-          attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').first.text
+          if keys[x] == "Confederation"
+            attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').text.gsub(/\[\d+\]/,"").gsub("\n"," ")
+          else
+            attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').text.gsub(/\[\d+\]/,"").gsub("\n",", ")
+          end
+        # if doc.css('table.infobox tbody tr')[i].css('th').text == keys[x]
+        #   begin
+        #     doc.css('table.infobox tbody tr')[i].css('td a').first.text
+        #     # binding.pry
+        #   rescue
+        #     attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').first.text
+        #   else
+        #     attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td a').text
+        #       # attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td a').first.text
+        #       # this solves the issue with ref numbers, but will bring back the issue when players aren't links
+        #   end #end of error handling
           x += 1
         else
           i += 1
-        end
+        end #end of if statement
         # binding.pry
-      end
+      end #end of while loop
 
       attributes
   end #end of scrape_team_page
