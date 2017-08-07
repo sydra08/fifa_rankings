@@ -1,10 +1,6 @@
 # scraper class
 # going to use the fixtures for scraping and testing until the code is almost ready to go in order to avoid over-scraping and being blocked from Wikipedia
 
-# mens ranking page: './fixtures/Mens-Wiki.html'
-# womens_ranking_page = './fixtures/Womens-Ranking-FIFA.com.html'
-# USA_womens_page = './fixtures/USA-Womens-FIFA.com.html'
-
 class FifaRankings::Scraper
 
   def self.scrape_rankings_page(ranking_url)
@@ -37,7 +33,6 @@ class FifaRankings::Scraper
       # end
       team = {
         name: doc.css('table.wikitable tr')[i].css('td')[2].css('a').text,
-        movement: doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value,
         points: doc.css('table.wikitable tr')[i].css('td')[3].text.to_i,
         team_url: doc.css('table.wikitable tr')[i].css('td')[2].css('a').attribute('href').value,
       }
@@ -47,6 +42,15 @@ class FifaRankings::Scraper
       else
         team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip.to_i
       end
+
+      if doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value == "Increase"
+        team[:movement] = "  \u2206"
+      elsif doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value == "Decrease"
+        team[:movement] = "  \u2207"
+      elsif doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value == "Steady"
+        team[:movement] = "  \u2014"
+      end
+
       teams << team
       i += 1
       end #end of while loop
@@ -55,25 +59,12 @@ class FifaRankings::Scraper
 
 
   def self.scrape_team_page(team_url)
-    # scrape the team wiki page and collect the details in a hashes
-    # returns a hash of new attributes for a team
-      # this will be passed to the Team class and used to add the detail-view attributes to the Team instances
-# `
-#       # team = {
-#       #   worst_rank:,
-#       #   worst_rank_year:,
-#       #   best_rank:,
-#       #   best_rank_year:
-#       #   average_rank_lifetime:,
-#       # }
-#
-      # html = File.read()
-      doc = Nokogiri::HTML(open(team_url))
-      # binding.pry
 
+      doc = Nokogiri::HTML(open(team_url))
       x, i = 0, 0
       attributes = {}
       keys = ["Confederation", "Head coach", "Captain", "Most caps", "Top scorer"]
+
       while doc.css('table.infobox tbody tr')[i].css('th').text != "FIFA code"
         # stops looking when it gets to the FIFA code row (this does mean my program could break if Wikipedia decides to change the table order)
         # is it worth refactoring to have the keys not be an array?
@@ -84,24 +75,11 @@ class FifaRankings::Scraper
           else
             attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').text.gsub(/\[\d+\]/,"").gsub("\n",", ")
           end
-        # if doc.css('table.infobox tbody tr')[i].css('th').text == keys[x]
-        #   begin
-        #     doc.css('table.infobox tbody tr')[i].css('td a').first.text
-        #     # binding.pry
-        #   rescue
-        #     attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').first.text
-        #   else
-        #     attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td a').text
-        #       # attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td a').first.text
-        #       # this solves the issue with ref numbers, but will bring back the issue when players aren't links
-        #   end #end of error handling
           x += 1
         else
           i += 1
         end #end of if statement
-        # binding.pry
       end #end of while loop
-
       attributes
   end #end of scrape_team_page
 
