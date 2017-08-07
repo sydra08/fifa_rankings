@@ -1,34 +1,19 @@
-# scraper class
 # going to use the fixtures for scraping and testing until the code is almost ready to go in order to avoid over-scraping and being blocked from Wikipedia
 
 class FifaRankings::Scraper
 
   def self.scrape_rankings_page(ranking_url)
-    # need to change the if statements and html variable assignment when it's time to live test
-    # scrape the rankings page and collect the information for each team
-    # how do we handle which wiki page to go to? => should that be passed in via the CLI?
-      # could be done when the user is asked to make a choice and the urls could be variables contained within the Scraper class...?
-    # returns an array of hashes
-      # this will be passed to the Team class and used to create the Team objects
-      # team = {
-      #   name: ,
-      #   rank:,
-      #   movement:,
-      #   points:,
-      #   team_url:
-      # }
-    html = File.read(ranking_url)
+    # need to change the html variable assignment when it's time to live test
+    html = open(ranking_url)
     doc = Nokogiri::HTML(html)
     teams = []
     i = 2 #should this be more abstract somehow?
     while i < 22 #change this to just be based on the table size
-      # doc.css('table.wikitable tr')[i].css('td').collect do |attribute|
+      # teams = doc.css('table.wikitable tr')[i].css('td').collect do |attribute|
       #   team = {
       #     name: attribute[2].css('a'),text,
-      #     movement: attribute[1].css('img').attribute('alt').value,
       #     points: attribute[3].text,
-      #     team_url: attribute[2].css('a').attribute('href').value,
-      #     gender: "womens"
+      #     team_url: attribute[2].css('a').attribute('href').value
       #   }
       # end
       team = {
@@ -43,6 +28,7 @@ class FifaRankings::Scraper
         team[:rank] = doc.css('table.wikitable tr')[i].css('td').text.slice(0,2).strip.to_i
       end
 
+      # this converts the Increase/Decrease/Steady into up arrow, down arrow and em dash
       if doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value == "Increase"
         team[:movement] = "  \u2206"
       elsif doc.css('table.wikitable tr')[i].css('td')[1].css('img').attribute('alt').value == "Decrease"

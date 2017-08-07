@@ -1,11 +1,9 @@
-#CLI controller
-
 class FifaRankings::CLI
   @@format = '%-6s %-14s %-10s' #not sure if this is the best way to represent this
 
   def welcome
-    puts "Welcome!"
     puts ""
+    puts "Welcome!"
     puts "Retrieving data..."
   end
 
@@ -36,7 +34,7 @@ class FifaRankings::CLI
 
   def list
     puts ""
-    puts "FIFA Women's World Rankings"
+    puts "FIFA Women's World Rankings".upcase
     puts "---------------------------"
     puts ""
     puts @@format % ["RANK", "TEAM", "CHANGE"]
@@ -51,8 +49,8 @@ class FifaRankings::CLI
     # seems like ||= would be really good here but not sure how to incorporate it just yet
 
     puts ""
-    puts "  #{team.name}"
-    puts "--------------------------------"
+    puts "  #{team.name.upcase}"
+    puts "-" * 78 #78 is the longest line + 2 on either side for spacing
     puts "  Rank:" + " #{team.rank}"
     puts "  Points:" + " #{team.points}"
     puts "  Confederation:" + " #{team.confederation}"
@@ -60,7 +58,7 @@ class FifaRankings::CLI
     puts "  Team captain:" + " #{team.captain}"
     puts "  Top scorer:" + " #{team.top_scorer}"
     puts "  Most caps:" + " #{team.most_caps}"
-    puts "--------------------------------"
+    puts "-" * 78
   end
 
   def details

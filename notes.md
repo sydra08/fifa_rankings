@@ -36,9 +36,9 @@
 [x] CLI - bug in #details loop - typing something incorrectly means you need to type exit multiple times in order to exit the loop
 [x] CLI - bug in #details loop - incorrect input message shows up when exiting
 [x] CLI - add loading message? data takes a while to load
-[ ] Scraper - clean up attributes data
-  [ ] sometimes the [ ] ref number shows up at the end of a row
-  [ ] if there's more than one player for that property then it shows up on 2 lines
+[x] Scraper - clean up attributes data
+  [x] sometimes the [ ] ref number shows up at the end of a row
+  [x] if there's more than one player for that property then it shows up on 2 lines
 
 #Tasks for Go-Live/Live Testing
 [ ] change html variable assignment in Scraper#scrape_rankings_page
