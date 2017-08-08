@@ -48,7 +48,8 @@
 [ ] #scrape_rankings_page - logic for scraping women's team rankings
 [x] CLI - use %s formatting for list view
 [ ] squash some commits?
-[ ] CLI - maybe get rid of the dashes in the detail view because the unevenness will annoy me?
+[x] CLI - maybe get rid of the dashes in the detail view because the unevenness will annoy me?
+[ ] add the ability to search by name or rank?
 
 
 Quick summary of app
