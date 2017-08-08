@@ -38,12 +38,12 @@ class FifaRankings::Scraper
     attributes = {}
     keys = ["Confederation", "Head coach", "Captain", "Most caps", "Top scorer"]
 
-    while doc.css('table.infobox tbody tr')[i].css('th').text != "FIFA code"
-      if doc.css('table.infobox tbody tr')[i].css('th').text == keys[x]
+    while doc.css('table.infobox tr')[i].css('th').text != "FIFA code"
+      if doc.css('table.infobox tr')[i].css('th').text == keys[x]
         if keys[x] == "Confederation"
-          attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').text.gsub("\n"," ")
+          attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tr')[i].css('td').text.gsub("\n"," ")
         else
-          attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tbody tr')[i].css('td').text.gsub(/\[\d+\]/,"").gsub("\n",", ")
+          attributes[keys[x].downcase.gsub(" ","_").to_sym] = doc.css('table.infobox tr')[i].css('td').text.gsub(/\[\d+\]/,"").gsub("\n",", ")
         end
         x += 1
       else

@@ -24,7 +24,7 @@ class FifaRankings::Team
   end
 
   def self.sort_by_rank
-    self.all.sort_by {|team| team.rank.to_i}
+    self.all.sort_by {|team| team.rank}
   end
 
   def self.all

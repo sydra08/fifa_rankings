@@ -25,15 +25,14 @@ class FifaRankings::CLI
   end
 
   def get_teams
-    teams = FifaRankings::Scraper.scrape_rankings_page('./fixtures/Womens-Wiki.html')
-    # teams = FifaRankings::Scraper.scrape_rankings_page('https://en.wikipedia.org/wiki/FIFA_Women%27s_World_Rankings')
+    teams = FifaRankings::Scraper.scrape_rankings_page('https://en.wikipedia.org/wiki/FIFA_Women%27s_World_Rankings')
     FifaRankings::Team.create_from_array(teams)
   end
 
   def add_attributes
     FifaRankings::Team.all.each do |team|
-      attributes = FifaRankings::Scraper.scrape_team_page('./fixtures/' + team.name + '-Womens-Wiki.html')
-      # attributes = FifaRankings::Scraper.scrape_team_page('https://en.wikipedia.org' + team.url)
+      # sleep 1.0 + rand
+      attributes = FifaRankings::Scraper.scrape_team_page('https://en.wikipedia.org' + team.url)
       team.add_attributes(attributes)
     end
   end
