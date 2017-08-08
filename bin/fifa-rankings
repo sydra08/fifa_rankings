@@ -2,4 +2,4 @@
 
 require './lib/fifa_rankings/'
 
-FifaRankings::CLI.new.call #=> start program
+FifaRankings::CLI.new.call

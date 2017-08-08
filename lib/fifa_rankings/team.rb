@@ -24,7 +24,6 @@ class FifaRankings::Team
   end
 
   def self.sort_by_rank
-    # teams sorted by rank
     self.all.sort_by {|team| team.rank.to_i}
   end
 
@@ -36,5 +35,8 @@ class FifaRankings::Team
     self.all.detect {|team| team.rank == rank}
   end
 
+  def self.find_by_name(name)
+    self.all.detect {|team| team.name.downcase == name.downcase}
+  end
 
 end
