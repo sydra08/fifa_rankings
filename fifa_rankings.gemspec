@@ -4,15 +4,15 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fifa_rankings/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "fifa_rankings"
+  spec.name          = 'fifa_rankings'
   spec.version       = FifaRankings::VERSION
-  spec.authors       = ["Sydney Chun"]
-  spec.email         = ["schun08@gmail.com"]
+  spec.authors       = 'Sydney Chun'
+  spec.email         = 'schun08@gmail.com'
 
   spec.summary       = "Lists FIFA World Rankings for the top 20 Women's teams."
   spec.description   = "Using data from Wikipedia, lists the top 20 FIFA teams and allows you to learn more information about each team."
-  spec.homepage      = "https://github.com/sydra08/fifa_rankings"
-  spec.license       = "MIT"
+  spec.homepage      = 'https://github.com/sydra08/fifa_rankings'
+  spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
