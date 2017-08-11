@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require './lib/fifa_rankings'
+require_relative '../lib/fifa_rankings'
 
 FifaRankings::CLI.new.call
