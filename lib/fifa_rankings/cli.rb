@@ -2,7 +2,7 @@ class FifaRankings::CLI
 
   def call
     welcome
-    load_data
+    get_teams
     list
     details
     goodbye
@@ -19,22 +19,10 @@ class FifaRankings::CLI
     puts "Goodbye! Come back to see the updated rankings soon."
   end
 
-  def load_data
-    get_teams
-    add_attributes
-  end
 
   def get_teams
     teams = FifaRankings::Scraper.scrape_rankings_page('https://en.wikipedia.org/wiki/FIFA_Women%27s_World_Rankings')
     FifaRankings::Team.create_from_array(teams)
-  end
-
-  def add_attributes
-    FifaRankings::Team.all.each do |team|
-      # sleep 1.0 + rand
-      attributes = FifaRankings::Scraper.scrape_team_page('https://en.wikipedia.org' + team.url)
-      team.add_attributes(attributes)
-    end
   end
 
   def list
@@ -49,7 +37,6 @@ class FifaRankings::CLI
       puts format % [i, team.name, team.movement]
     end
   end
-
 
   def details
     input = nil
@@ -73,6 +60,8 @@ class FifaRankings::CLI
 
   def print_team(input)
     team = FifaRankings::Team.find_by_rank(input.to_i) || FifaRankings::Team.find_by_name(input)
+    attributes = FifaRankings::Scraper.scrape_team_page('https://en.wikipedia.org' + team.url)
+    team.add_attributes(attributes)
 
     puts ""
     puts "  #{team.name.upcase}"
