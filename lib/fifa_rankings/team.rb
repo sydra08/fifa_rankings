@@ -3,11 +3,16 @@ class FifaRankings::Team
 
   @@all = []
 
+
   def initialize(team_hash)
     team_hash.each do |k,v|
       self.send(("#{k}="),v)
     end
     @@all << self
+  end
+
+  def self.points_greater_than(number)
+    self.all.select {|team| team.points > number}
   end
 
   def self.create_from_array(array)
